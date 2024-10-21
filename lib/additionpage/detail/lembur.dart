@@ -250,6 +250,7 @@ class LemburState extends State<Lembur> {
       'user_id_penerima':
           data['karyawan']['jabatan']['atasan_1']['user']['id_user'].toString(),
       'tglLembur': dateController.text,
+      'tgl_lembur': dateController.text,
       'jenisLembur': jenisLemburController.text,
       'mulai': timeMulaiController.text,
       'selesai': timeSelesaiController.text,

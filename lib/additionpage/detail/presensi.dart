@@ -360,7 +360,11 @@ class InfoUser extends StatelessWidget {
               width: lebarlayar / 3,
               height: tinggilayar / 4,
               child: Image.network(
-                "$protokol$baseUrl/assets/foto_profil/${data['karyawan']['user']['foto']}",
+                data['karyawan'] != null &&
+                        data['karyawan']['user'] != null &&
+                        data['karyawan']['user']['foto'] != null
+                    ? "$protokol$baseUrl/assets/foto_profil/${data['karyawan']['user']['foto']}"
+                    : 'URL_TO_DEFAULT_IMAGE', // URL gambar default jika data null
                 fit: BoxFit.cover,
               ),
             ),
@@ -380,7 +384,11 @@ class InfoUser extends StatelessWidget {
                             text: "NIK : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: data['karyawan']['user']['nik'].toString(),
+                          text: data['karyawan'] != null &&
+                                  data['karyawan']['user'] != null &&
+                                  data['karyawan']['user']['nik'] != null
+                              ? data['karyawan']['user']['nik'].toString()
+                              : '',
                         )
                       ],
                       style: TextStyle(
