@@ -404,7 +404,11 @@ class InfoUser extends StatelessWidget {
                             text: "Nama : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: data['karyawan']['nama_lengkap'].toString())
+                          text: data['karyawan'] != null &&
+                                  data['karyawan']['nama_lengkap'] != null
+                              ? data['karyawan']['nama_lengkap'].toString()
+                              : '',
+                        )
                       ],
                       style: TextStyle(
                           fontFamily: "Poppins",
@@ -419,8 +423,13 @@ class InfoUser extends StatelessWidget {
                             text: "Zona : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: data['karyawan']['zona']['nama_zona']
-                                .toString(),
+                            text: data['karyawan'] != null &&
+                                    data['karyawan']['zona'] != null &&
+                                    data['karyawan']['zona']['nama_zona'] !=
+                                        null
+                                ? data['karyawan']['zona']['nama_zona']
+                                    .toString()
+                                : '',
                             style: const TextStyle(
                               fontSize: 12,
                             ))
@@ -438,8 +447,12 @@ class InfoUser extends StatelessWidget {
                             text: "Regu : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: data['karyawan']['regu']['nama_regu']
-                                .toString())
+                          text: data['karyawan'] != null &&
+                                  data['karyawan']['regu'] != null &&
+                                  data['karyawan']['regu']['nama_regu'] != null
+                              ? data['karyawan']['regu']['nama_regu'].toString()
+                              : '',
+                        )
                       ],
                       style: TextStyle(
                           fontFamily: "Poppins",
@@ -454,8 +467,14 @@ class InfoUser extends StatelessWidget {
                             text: "Jabatan : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: data['karyawan']['jabatan']['nama_jabatan']
-                                .toString(),
+                            text: data['karyawan'] != null &&
+                                    data['karyawan']['jabatan'] != null &&
+                                    data['karyawan']['jabatan']
+                                            ['nama_jabatan'] !=
+                                        null
+                                ? data['karyawan']['jabatan']['nama_jabatan']
+                                    .toString()
+                                : '',
                             style: const TextStyle(
                               fontSize: 12,
                             )),

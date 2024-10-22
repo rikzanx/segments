@@ -78,7 +78,7 @@ class PenilaianKinerjaDetailState extends State<PenilaianKinerjaDetail> {
         ),
         body: IndexedStack(index: position, children: <Widget>[
           WebViewWidget(controller: webViewController),
-          Center(child: const CircularProgressIndicator())
+          const Center(child: CircularProgressIndicator())
         ]));
   }
 
