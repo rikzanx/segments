@@ -23,6 +23,7 @@ class ListLemburDetailState extends State<ListLemburDetail> {
   String _tipe = '0';
   String _judul = '';
   int position = 1;
+  int sumtotaljamlembur = 0;
   List<dynamic> _dataLembur = [];
   @override
   void initState() {
@@ -53,15 +54,16 @@ class ListLemburDetailState extends State<ListLemburDetail> {
         ),
         backgroundColor: primarycolor,
         elevation: 0,
-        title: const Text(
+        title: Text(
           "List Lembur",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
       body: Column(
         children: [
           Text(_judul),
+          Text("Total $_judul : $sumtotaljamlembur"),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -76,6 +78,7 @@ class ListLemburDetailState extends State<ListLemburDetail> {
               ),
             ),
           ),
+          
         ],
       ),
     );
@@ -93,7 +96,9 @@ class ListLemburDetailState extends State<ListLemburDetail> {
     return [
       const DataColumn(label: Text('No')),
       const DataColumn(label: Text('Tgl Lembur')),
+      const DataColumn(label: Text('Total Jam')),
       const DataColumn(label: Text('Jenis Lembur')),
+      const DataColumn(label: Text('Detail Lembur')),
       const DataColumn(label: Text('Mulai')),
       const DataColumn(label: Text('Selesai')),
       const DataColumn(label: Text('NIK')),
@@ -111,7 +116,9 @@ class ListLemburDetailState extends State<ListLemburDetail> {
         return DataRow(cells: [
           DataCell(Text(num.toString())),
           DataCell(Text(data['tgl_lembur'].toString())),
+          DataCell(Text(data['total_jam_lembur'].toString())),
           DataCell(Text(data['jenis_lembur'].toString())),
+          DataCell(Text(data['detail_lembur'].toString())),
           DataCell(Text(data['mulai'].toString())),
           DataCell(Text(data['selesai'].toString())),
           DataCell(Text(data['nik'])),
@@ -148,6 +155,8 @@ class ListLemburDetailState extends State<ListLemburDetail> {
           DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),
+          DataCell(Text('')),
+          DataCell(Text('')),
           DataCell(Text(''))
         ]),
       ];
@@ -171,6 +180,10 @@ class ListLemburDetailState extends State<ListLemburDetail> {
         // print(response.data.isList);
         setState(() {
           _dataLembur = response.data;
+          sumtotaljamlembur = _dataLembur.fold(
+            0,
+            (sum, data) => sum + int.parse(data['total_jam_lembur']),
+          );
         });
       }
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/list_data_detail/list_absen.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur.dart';
+import 'package:segments/additionpage/list_data_detail/list_lembur_bulan.dart';
 import 'package:segments/additionpage/list_data_detail/list_presensi.dart';
 import 'package:segments/additionpage/list_data_detail/penilaian_kinerja.dart';
 import 'package:segments/additionpage/list_data_detail/slip_gaji.dart';
@@ -71,7 +72,7 @@ class ListDataState extends State<ListData> {
                   fit: BoxFit.cover,
                 ),
                 fungsi: () {
-                  pindahPageCupertino(context, const ListLembur());
+                  pindahPageCupertino(context, const ListLemburBulan());
                   // MyFunction().belumTersedia();
                 },
                 judul: "List Lembur",

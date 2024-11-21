@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:segments/additionpage/list_data_detail/list_lembur_detail.dart';
+import 'package:segments/additionpage/list_data_detail/list_lembur.dart';
 
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 import 'package:segments/my_function.dart';
 
-class ListLembur extends StatefulWidget {
-  final String bulan;
-  final String namabulan;
-  final String judul;
-  const ListLembur(
-      {super.key,required this.bulan,required this.namabulan,required this.judul});
+class ListLemburBulan extends StatefulWidget {
+  const ListLemburBulan({super.key});
 
   @override
-  ListLemburState createState() => ListLemburState();
+  ListLemburBulanState createState() => ListLemburBulanState();
 }
 
-class ListLemburState extends State<ListLembur> {
+class ListLemburBulanState extends State<ListLemburBulan> {
   String _nik = '';
-  String _judul = '';
-  String _bulan = '';
-  String _namabulan = '';
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -43,9 +36,7 @@ class ListLemburState extends State<ListLembur> {
   @override
   void initState() {
     super.initState();
-    _bulan = widget.bulan;
-    _namabulan = widget.namabulan;
-    _judul = widget.judul;
+
     init();
   }
 
@@ -68,9 +59,9 @@ class ListLemburState extends State<ListLembur> {
           ),
           backgroundColor: primarycolor, // Set the desired green color
           elevation: 0,
-          title: Text(
-            "$_judul ",
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          title: const Text(
+            "List Lembur",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
         ),
@@ -80,18 +71,18 @@ class ListLemburState extends State<ListLembur> {
             mainAxisAlignment: MainAxisAlignment.start,
             direction: Axis.vertical,
             children: [
-              for (int i = 0; i < tipe.length; i++)
+              for (int i = 1; i <= bulan.length; i++)
                 LitleCardFunction(
                     fungsi: () {
                       pindahPageCupertino(
                           context,
-                          ListLemburDetail(
-                            tipe: i.toString(),
-                            nik: _nik.toString(),
-                            judul: "Lembur bulan $_namabulan yang ${tipe[i]}",
+                          ListLembur(
+                            bulan: i.toString(),
+                            namabulan: bulan[i].toString(),
+                            judul: "Lembur Bulan ${bulan[i]}",
                           ));
                     },
-                    judul: tipe[i].toString()),
+                    judul: bulan[i].toString()),
             ],
           ),
         ));
