@@ -233,7 +233,7 @@ class JadwalState extends State<Jadwal> {
   Future init() async {
     await ApiController().getUser().then((value) {
       // print(value);
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           // print(data);

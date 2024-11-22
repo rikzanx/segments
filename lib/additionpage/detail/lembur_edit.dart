@@ -103,7 +103,7 @@ class LemburEditState extends State<LemburEdit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -222,7 +222,7 @@ class LemburEditState extends State<LemburEdit> {
         context, const PencarianParent(tipe: "jenisLembur"));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           jenisLemburController.text = result;
         });
@@ -231,8 +231,7 @@ class LemburEditState extends State<LemburEdit> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'id_lembur': widget.idLembur,
@@ -244,7 +243,7 @@ class LemburEditState extends State<LemburEdit> {
 
     // print(body);
     await ApiController().lemburEdit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -283,7 +282,7 @@ class LemburEditState extends State<LemburEdit> {
     timeMulaiController = TextEditingController(text: widget.mulai);
     timeSelesaiController = TextEditingController(text: widget.selesai);
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           Map<String, dynamic>? data = value.data; // Declare data as a Map or null
           // Check if data is not null before accessing its contents

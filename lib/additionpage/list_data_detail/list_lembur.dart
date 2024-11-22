@@ -88,6 +88,7 @@ class ListLemburState extends State<ListLembur> {
                           ListLemburDetail(
                             tipe: i.toString(),
                             nik: _nik.toString(),
+                            bulan: _bulan.toString(),
                             judul: "Lembur bulan $_namabulan yang ${tipe[i]}",
                           ));
                     },

@@ -47,7 +47,7 @@ class TukarShiftState extends State<TukarShift> {
         width: lebarlayar,
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -97,7 +97,7 @@ class TukarShiftState extends State<TukarShift> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           // print("data=$data");

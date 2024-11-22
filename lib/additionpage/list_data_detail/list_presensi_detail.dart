@@ -78,7 +78,7 @@ class ListPresensiDetailState extends State<ListPresensiDetail> {
         ),
         body: IndexedStack(index: position, children: <Widget>[
           WebViewWidget(controller: webViewController),
-          Center(child: const CircularProgressIndicator()),
+          const Center(child: const CircularProgressIndicator()),
         ]));
   }
 

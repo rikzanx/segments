@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/list_data_detail/list_absen.dart';
-import 'package:segments/additionpage/list_data_detail/list_lembur.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur_bulan.dart';
 import 'package:segments/additionpage/list_data_detail/list_presensi.dart';
 import 'package:segments/additionpage/list_data_detail/penilaian_kinerja.dart';

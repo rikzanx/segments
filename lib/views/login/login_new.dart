@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/views/home/home.dart';
-import 'package:segments/views/schedule/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
@@ -33,7 +32,7 @@ class LoginNewState extends State<LoginNew> {
     // Add listeners to controllers
     _nikcontroller.addListener(_validateEmail);
     _passwordcontroller.addListener(_validatePassword);
-    getDataBerita();
+    // getDataBerita();
   }
 
   @override
@@ -72,11 +71,8 @@ class LoginNewState extends State<LoginNew> {
 
   Future _initUser() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
         setState(() {
           dataUser = value.data;
-          // print("ok");
-          // print(dataUser);
           Navigator.pushAndRemoveUntil(context,
               MaterialPageRoute(builder: (context) {
             return const MainScreen();
@@ -88,7 +84,6 @@ class LoginNewState extends State<LoginNew> {
               textStyle: const TextStyle(fontSize: 14, color: Colors.white),
               contentColor: Colors.green);
         });
-      }
     });
   }
 
@@ -120,7 +115,7 @@ class LoginNewState extends State<LoginNew> {
       };
       await ApiController().login(body).then(
         (response) {
-          if (!mounted) return;
+          //mntd
           var value = response.data;
           // print(response.status);
           // print(response.data);
@@ -177,7 +172,7 @@ class LoginNewState extends State<LoginNew> {
         },
       );
     } else {
-      if (!mounted) return;
+      //mntd
       showDialog(
         context: context,
         barrierDismissible: false, // user must tap button!

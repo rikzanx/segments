@@ -25,7 +25,7 @@ class ApiController {
     // if (protokol == 'https://')
     //   url = Uri.https(baseUrl, "api/" + path);
     // else
-    url = Uri.http(baseUrl, "api/$path", parameter);
+    url = Uri.https(baseUrl, "api/$path", parameter);
     http.Response res;
     if (method == "get") {
       final res = await http.get(url);

@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/detail/presensi.dart';
 import 'package:segments/apicontroller.dart';
 import 'package:segments/class/form_component.dart';
+import 'package:segments/class/public_function.dart';
 import 'package:segments/constant.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/cupertino.dart';
 
 class Dispensasi extends StatefulWidget {
   const Dispensasi({super.key});
@@ -17,6 +22,12 @@ class DispensasiState extends State<Dispensasi> {
   final deskripsiController = TextEditingController();
   String sisaCuti = "0";
 
+  List dataFoto = [];
+  final ImagePicker _picker = ImagePicker();
+  XFile? _imageFileList;
+  // ignore: unused_field
+  dynamic _pickImageError;
+
   Future datepicker() async {
     final DateTime? tgl = await showDatePicker(
       context: context,
@@ -26,6 +37,24 @@ class DispensasiState extends State<Dispensasi> {
     );
     if (tgl != null) {
       dateController.text = tgl.toString().substring(0, 10);
+    }
+  }
+
+  Future getImage() async {
+    try {
+      final pickedFileList = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 20,
+      );
+      setState(() {
+        _imageFileList = pickedFileList;
+      });
+
+      // print(_imageFileList);
+    } catch (e) {
+      setState(() {
+        _pickImageError = e;
+      });
     }
   }
 
@@ -60,7 +89,7 @@ class DispensasiState extends State<Dispensasi> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -110,6 +139,29 @@ class DispensasiState extends State<Dispensasi> {
               ),
             ),
             const SizedBox(
+              height: 16,
+            ),
+            myContainer(
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  label("Foto Bukti/Dokumen Dispensasi"),
+                  IconButton(
+                      onPressed: () {
+                        getImage();
+                      },
+                      icon: const Icon(CupertinoIcons.photo_camera))
+                ],
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              _imageFileList != null
+                  ? Image.file(File(_imageFileList!.path))
+                  : Container()
+            ])),
+            const SizedBox(
               height: 32,
             ),
             PrimaryButton(
@@ -141,8 +193,9 @@ class DispensasiState extends State<Dispensasi> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    String base64 =
+        await PublicFunction().convertImageToBase64(File(_imageFileList!.path));
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'nama_lengkap': data['karyawan']['nama_lengkap'].toString(),
@@ -151,11 +204,12 @@ class DispensasiState extends State<Dispensasi> {
       'tgl_absen': dateController.text,
       'tipe_absen': "Dispensasi",
       'detail_absen': deskripsiController.text,
+      'foto': base64
     };
 
     // print(body);
     await ApiController().dispensasiSubmit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -190,7 +244,7 @@ class DispensasiState extends State<Dispensasi> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           sisaCuti = data["sisa_cuti"].toString();

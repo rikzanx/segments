@@ -305,7 +305,7 @@ class TambahLaporanState extends State<TambahLaporan> {
   Future init() async {
     await ApiController().getCurrentLocation().then((value) {
       // print(value);
-      if (mounted) {
+      if (1==1) {
         setState(() {
           lat = value.latitude;
           lng = value.longitude;
@@ -338,8 +338,7 @@ class TambahLaporanState extends State<TambahLaporan> {
       fotoBase64.add(base64);
     }
 
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'nik': dataUser['karyawan']['nik'].toString(),
@@ -356,9 +355,9 @@ class TambahLaporanState extends State<TambahLaporan> {
       'bantuan_pengamanan': bantuanController.text,
       'foto': jsonEncode(fotoBase64)
     };
-    if (!mounted) return;
+    //mntd
     await ApiController().laporanStore(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -396,7 +395,7 @@ class TambahLaporanState extends State<TambahLaporan> {
         context, const PencarianParent(tipe: "kategori"));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           kategoriController.text = result['nama_kategori'];
           idKategori = result['id_kategori'];
@@ -412,7 +411,7 @@ class TambahLaporanState extends State<TambahLaporan> {
     }));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           prioritasController.text = result;
         });
@@ -427,7 +426,7 @@ class TambahLaporanState extends State<TambahLaporan> {
     }));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           zonaController.text = result["nama_zona"];
           idZona = result["id_zona"];

@@ -37,7 +37,7 @@ class LemburState extends State<Lembur> {
   Future timemulai() async {
     final TimeOfDay? timeMulai = await showTimePicker(
         context: context, initialTime: TimeOfDay.fromDateTime(DateTime.now()));
-    if (!mounted) return;
+    //mntd
 
     if (timeMulai != null) {
       timeMulaiController.text = timeMulai.format(context);
@@ -50,7 +50,7 @@ class LemburState extends State<Lembur> {
         context: context,
         initialTime: TimeOfDay.fromDateTime(DateTime.now()
             .add(const Duration(hours: 1, minutes: 0, seconds: 0))));
-    if (!mounted) return;
+    //mntd
 
     if (timeSelesai != null) {
       timeSelesaiController.text = timeSelesai.format(context);
@@ -89,15 +89,15 @@ class LemburState extends State<Lembur> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
-            Text(
-              "Total Lembur pada bulan ini: $totalLembur jam",
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: tinggilayar / lebarlayar * 6),
-            ),
+            // Text(
+            //   "Total Lembur pada bulan ini: $totalLembur jam",
+            //   textAlign: TextAlign.justify,
+            //   style: TextStyle(fontSize: tinggilayar / lebarlayar * 6),
+            // ),
             SizedBox(
               height: tinggilayar / 40,
             ),
@@ -233,7 +233,7 @@ class LemburState extends State<Lembur> {
         context, const PencarianParent(tipe: "jenisLembur"));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           jenisLemburController.text = result;
         });
@@ -242,8 +242,7 @@ class LemburState extends State<Lembur> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'nama_lengkap': data['karyawan']['nama_lengkap'].toString(),
@@ -258,7 +257,7 @@ class LemburState extends State<Lembur> {
 
     // print(body);
     await ApiController().lemburSubmit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -293,7 +292,7 @@ class LemburState extends State<Lembur> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           totalLembur = data["totalLembur"].toString();

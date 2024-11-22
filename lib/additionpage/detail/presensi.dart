@@ -6,7 +6,6 @@ import 'package:segments/constant.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:segments/apicontroller.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:trust_location/trust_location.dart';
 
 class PresensiMasuk extends StatefulWidget {
   const PresensiMasuk({super.key});
@@ -26,8 +25,8 @@ class PresensiMasukState extends State<PresensiMasuk> {
   double lat = 0.0, lng = 0.0;
 
   String action = "";
-  bool canMockLocation = true;
-  bool isMockLocation = true;
+  bool canMockLocation = false;
+  bool isMockLocation = false;
 
   @override
   void initState() {
@@ -40,7 +39,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
   @override
   Widget build(BuildContext context) {
     Future<void> save() async {
-      if (!mounted) return;
+      //mntd
 
       if (isMockLocation) {
         await showDialog(
@@ -88,7 +87,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
         try {
           final response = await ApiController().checkin(body);
 
-          if (!mounted) return;
+          //mntd
 
           var value = response.data;
           BotToast.closeAllLoading();
@@ -194,7 +193,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
           width: lebarlayar,
           child: Column(
             children: [
-              const InfoUser(),
+              InfoUser(),
               SizedBox(
                 height: tinggilayar / 40,
               ),
@@ -258,7 +257,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           action = value.data["jadwal"]["action"];
@@ -267,7 +266,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
       }
     });
     await ApiController().getCurrentLocation().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           lat = value.latitude;
           lng = value.longitude;
@@ -275,7 +274,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
         });
       }
     });
-    bool hasil = await TrustLocation.isMockLocation;
+    bool hasil = false;
     setState(() {
       isMockLocation = hasil;
     });

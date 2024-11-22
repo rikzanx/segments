@@ -89,7 +89,7 @@ class SakitState extends State<Sakit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -196,8 +196,7 @@ class SakitState extends State<Sakit> {
     String base64 =
         await PublicFunction().convertImageToBase64(File(_imageFileList!.path));
 
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'nama_lengkap': data['karyawan']['nama_lengkap'].toString(),
@@ -211,7 +210,7 @@ class SakitState extends State<Sakit> {
 
     // print(body);
     await ApiController().sakitSubmit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -246,7 +245,7 @@ class SakitState extends State<Sakit> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           sisaCuti = data["sisa_cuti"].toString();

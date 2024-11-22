@@ -9,8 +9,9 @@ class ListLemburDetail extends StatefulWidget {
   final String tipe;
   final String nik;
   final String judul;
+  final String bulan;
   const ListLemburDetail(
-      {super.key, required this.tipe, required this.nik, required this.judul});
+      {super.key, required this.tipe, required this.nik, required this.judul, required this.bulan});
 
   @override
   ListLemburDetailState createState() => ListLemburDetailState();
@@ -22,16 +23,18 @@ class ListLemburDetailState extends State<ListLemburDetail> {
   // ignore: unused_field
   String _tipe = '0';
   String _judul = '';
+  String _bulan = '';
   int position = 1;
   int sumtotaljamlembur = 0;
   List<dynamic> _dataLembur = [];
   @override
   void initState() {
     // init();
-    _getDataLembur(widget.tipe.toString(), widget.nik);
+    _getDataLembur(widget.tipe.toString(), widget.nik,widget.bulan);
     _tipe = widget.tipe;
     _nik = widget.nik;
     _judul = widget.judul;
+    _bulan = widget.bulan;
     super.initState();
   }
 
@@ -54,9 +57,9 @@ class ListLemburDetailState extends State<ListLemburDetail> {
         ),
         backgroundColor: primarycolor,
         elevation: 0,
-        title: Text(
+        title: const Text(
           "List Lembur",
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -172,8 +175,8 @@ class ListLemburDetailState extends State<ListLemburDetail> {
     });
   }
 
-  Future _getDataLembur(String tipe, String nik) async {
-    Map<String, String> body = {'tipe': tipe, 'nik': nik};
+  Future _getDataLembur(String tipe, String nik,String bulan) async {
+    Map<String, String> body = {'tipe': tipe, 'nik': nik,'id_bulan':bulan};
     var response = await ApiController().getDataLembur(body);
     if (response.status) {
       if (response.data.length > 0) {

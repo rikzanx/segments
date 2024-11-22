@@ -24,7 +24,7 @@ class LemburKhususState extends State<LemburKhusus> {
   Future timemulai() async {
     final TimeOfDay? timeMulai = await showTimePicker(
         context: context, initialTime: TimeOfDay.fromDateTime(DateTime.now()));
-    if (!mounted) return;
+    //mntd
     if (timeMulai != null) {
       timeMulaiController.text = timeMulai.format(context);
       // print(timeMulai.format(context));
@@ -36,7 +36,7 @@ class LemburKhususState extends State<LemburKhusus> {
         context: context,
         initialTime: TimeOfDay.fromDateTime(DateTime.now()
             .add(const Duration(hours: 1, minutes: 0, seconds: 0))));
-    if (!mounted) return;
+    //mntd
     if (timeSelesai != null) {
       timeSelesaiController.text = timeSelesai.format(context);
       // print(timeSelesai.toString());
@@ -44,7 +44,7 @@ class LemburKhususState extends State<LemburKhusus> {
   }
 
   Future datepicker() async {
-    if (!mounted) return;
+    //mntd
     final DateTime? tgl = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -87,7 +87,7 @@ class LemburKhususState extends State<LemburKhusus> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -220,7 +220,7 @@ class LemburKhususState extends State<LemburKhusus> {
         context, const PencarianParent(tipe: "jenisLemburKhusus"));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           jenisLemburKhususController.text = result;
         });
@@ -229,8 +229,7 @@ class LemburKhususState extends State<LemburKhusus> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'nama_lengkap': data['karyawan']['nama_lengkap'].toString(),
@@ -246,7 +245,7 @@ class LemburKhususState extends State<LemburKhusus> {
 
     // print(body);
     await ApiController().lemburkhususSubmit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -281,7 +280,7 @@ class LemburKhususState extends State<LemburKhusus> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           // print("data=$data");

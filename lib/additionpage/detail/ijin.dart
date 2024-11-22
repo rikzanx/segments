@@ -60,7 +60,7 @@ class IjinState extends State<Ijin> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -141,8 +141,7 @@ class IjinState extends State<Ijin> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'nama_lengkap': data['karyawan']['nama_lengkap'].toString(),
@@ -155,7 +154,7 @@ class IjinState extends State<Ijin> {
 
     // print(body);
     await ApiController().ijinSubmit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -190,7 +189,7 @@ class IjinState extends State<Ijin> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           sisaCuti = data["sisa_cuti"].toString();

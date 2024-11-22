@@ -68,8 +68,7 @@ class PencarianParentState extends State<PencarianParent> {
   }
 
   Future init() async {
-    BotToast.showLoading(
-        crossPage: false, allowClick: false, clickClose: false);
+    BotToast.showLoading(crossPage: false, allowClick: false, clickClose: false);
     await ApiController().pencarianParent().then((response) {
       var value = response.data;
       if (mounted) setState(() => data = value[widget.tipe]);

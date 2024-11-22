@@ -92,15 +92,12 @@ class SplashScreenState extends State<SplashScreen> {
 
   Future init() async {
     var value = await MyFunction().checkNik();
-
+  
     if (value) {
       await ApiController().getUser().then((value) {
-        if (mounted) {
+        if (1==1) {
           setState(() {
-            // print(value.status);
             if (value.status) {
-              // print("oke");
-
               dataUser = value.data;
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) {

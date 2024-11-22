@@ -88,7 +88,7 @@ class CutiState extends State<Cuti> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -205,8 +205,7 @@ class CutiState extends State<Cuti> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     String base64 =
         await PublicFunction().convertImageToBase64(File(_imageFileList!.path));
@@ -223,7 +222,7 @@ class CutiState extends State<Cuti> {
 
     // print(body);
     await ApiController().cutiSubmit(body).then((response) {
-      if (!mounted) return;
+      //mntd
 
       if (response.data['success']) {
         BotToast.closeAllLoading();
@@ -259,7 +258,7 @@ class CutiState extends State<Cuti> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           sisaCuti = data["sisa_cuti"].toString();

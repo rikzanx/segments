@@ -64,7 +64,7 @@ class EditState extends State<Edit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 10,
             ),
@@ -165,8 +165,7 @@ class EditState extends State<Edit> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'password': passwordController.text,
@@ -176,7 +175,7 @@ class EditState extends State<Edit> {
 
     // print(body);
     await ApiController().changePassword(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -211,7 +210,7 @@ class EditState extends State<Edit> {
 
   Future init() async {
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           // print("data=$data");

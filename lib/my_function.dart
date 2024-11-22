@@ -30,21 +30,6 @@ class MyFunction {
   }
 
   void belumTersedia() {
-    // showModalBottomSheet(
-    //   context: context,
-    //   builder: (context) {
-    //     return Container(
-    //       height: 300,
-    //       decoration: BoxDecoration(
-    //         color: Colors.white,
-    //         borderRadius: BorderRadius.only(
-    //           topLeft: Radius.circular(20),
-    //           topRight: Radius.circular(20),
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // );
     BotToast.showText(text: "Layanan Belum Tersedia", contentColor: Colors.red);
   }
 }

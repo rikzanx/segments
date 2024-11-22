@@ -121,7 +121,7 @@ class KehadiranState extends State<Kehadiran> {
       var value = response.data;
       BotToast.closeAllLoading();
 
-      if (mounted) {
+      if (1==1) {
         setState(() {
           cekIn = value['checkin'];
           cekOut = value['checkout'];

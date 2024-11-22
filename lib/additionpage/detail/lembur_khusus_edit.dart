@@ -49,7 +49,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
   Future timemulai() async {
     final TimeOfDay? timeMulai =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (!mounted) return;
+    //mntd
     if (timeMulai != null) {
       timeMulaiController.text = timeMulai.format(context);
       // print(timeMulai.format(context));
@@ -59,7 +59,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
   Future timeselesai() async {
     final TimeOfDay? timeSelesai =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (!mounted) return;
+    //mntd
     if (timeSelesai != null) {
       timeSelesaiController.text = timeSelesai.format(context);
       // print(timeSelesai.toString());
@@ -97,7 +97,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             const SizedBox(
               height: 20,
             ),
@@ -216,7 +216,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
         context, const PencarianParent(tipe: "jenisLembur"));
 
     if (result != null) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           jenisLemburController.text = result;
         });
@@ -225,8 +225,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
   }
 
   Future save() async {
-    BotToast.showLoading(
-        clickClose: false, allowClick: false, crossPage: false);
+    BotToast.showLoading(clickClose: false, allowClick: false, crossPage: false);
 
     Map<String, String> body = {
       'id_lembur_khusus': widget.idLemburKhusus,
@@ -238,7 +237,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
 
     // print(body);
     await ApiController().lemburkhususEdit(body).then((response) {
-      if (!mounted) return;
+      //mntd
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);
@@ -278,7 +277,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
     timeMulaiController = TextEditingController(text: widget.mulai);
     timeSelesaiController = TextEditingController(text: widget.selesai);
     await ApiController().getUser().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value.data;
           sisaLembur = data["sisa_lembur"].toString();

@@ -38,7 +38,7 @@ class PresensiKeluarState extends State<PresensiKeluar> {
 
       await ApiController().checkout(id_presensi: id_presensi).then((response) {
         var value = response.data;
-        if (!mounted) return;
+        //mntd
         if (value['success'] == true) {
           BotToast.closeAllLoading();
           showDialog(
@@ -116,7 +116,7 @@ class PresensiKeluarState extends State<PresensiKeluar> {
         width: lebarlayar,
         child: Column(
           children: [
-            const InfoUser(),
+            InfoUser(),
             SizedBox(
               height: tinggilayar / 40,
             ),
@@ -175,7 +175,7 @@ class PresensiKeluarState extends State<PresensiKeluar> {
   Future init() async {
     await ApiController().getUser().then((response) {
       var value = response.data;
-      if (mounted) {
+      if (1==1) {
         setState(() {
           data = value;
           // print("data=$data");
@@ -184,7 +184,7 @@ class PresensiKeluarState extends State<PresensiKeluar> {
     });
     await ApiController().getJamMasuk().then((response) {
       var value = response.data;
-      if (mounted) {
+      if (1==1) {
         setState(() {
           jammasuk = value["check_in"];
           id_presensi = value["id_presensi"].toString();
@@ -192,7 +192,7 @@ class PresensiKeluarState extends State<PresensiKeluar> {
       }
     });
     await ApiController().getCurrentLocation().then((value) {
-      if (mounted) {
+      if (1==1) {
         setState(() {
           lat = value.latitude;
           lng = value.longitude;
