@@ -7,6 +7,7 @@ import 'package:segments/introslider.dart';
 import 'package:segments/my_function.dart';
 import 'package:segments/views/home/home.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 // bool _login = false;
 void main() async {
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key, required this.title});
-
+  
   final String title;
 
   @override
@@ -50,7 +51,8 @@ class SplashScreen extends StatefulWidget {
 
 class SplashScreenState extends State<SplashScreen> {
   // int _counter = 0;
-
+  String appVersion = "Loading...";
+  bool canContinue = false;
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 2500)).then((value) {
@@ -81,9 +83,19 @@ class SplashScreenState extends State<SplashScreen> {
               bottom: 0,
               child: Container(
                 padding: EdgeInsets.only(bottom: tinggilayar / 15),
+                child: Text(appVersion,
+                style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),),
+              ),
+            ),
+            Positioned(
+              top: 50,
+              child: Container(
+                padding: EdgeInsets.only(bottom: tinggilayar / 15),
                 child: Image.asset('assets/pgputih.png', scale: 5.5),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -91,33 +103,48 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future init() async {
-    var value = await MyFunction().checkNik();
-  
-    if (value) {
-      await ApiController().getUser().then((value) {
-        if (1==1) {
-          setState(() {
-            if (value.status) {
-              dataUser = value.data;
-              Navigator.pushAndRemoveUntil(context,
-                  MaterialPageRoute(builder: (context) {
-                return const MainScreen();
-              }), (route) => false);
+    final packageInfo = await PackageInfo.fromPlatform();
+    await ApiController().getDataVersion().then((value) {
+      print("ini data version");
+      if(value.data['version'] != packageInfo.version){
+        setState(() {
+          appVersion = "Mohon Update Aplikasi!!!";
+        });
+      }else{
+        setState(() {
+          appVersion = "v${packageInfo.version}";
+          canContinue= true;
+        });
+      }
+    });
+    if(canContinue){
+      var value = await MyFunction().checkNik();
+      if (value) {
+        await ApiController().getUser().then((value) {
+          if (1==1) {
+            setState(() {
+              if (value.status) {
+                dataUser = value.data;
+                Navigator.pushAndRemoveUntil(context,
+                    MaterialPageRoute(builder: (context) {
+                  return const MainScreen();
+                }), (route) => false);
 
-              BotToast.showText(
-                  text: "Login Sukses",
-                  crossPage: true,
-                  textStyle: const TextStyle(fontSize: 14, color: Colors.white),
-                  contentColor: Colors.green);
-            }
-          });
-        }
-      });
-    } else {
-      Navigator.push(
-          context,
-          CupertinoPageRoute(
-              builder: (BuildContext builder) => const IntroSlider()));
+                BotToast.showText(
+                    text: "Login Sukses",
+                    crossPage: true,
+                    textStyle: const TextStyle(fontSize: 14, color: Colors.white),
+                    contentColor: Colors.green);
+              }
+            });
+          }
+        });
+      } else {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (BuildContext builder) => const IntroSlider()));
+      }
     }
   }
 }

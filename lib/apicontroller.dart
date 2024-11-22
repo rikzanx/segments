@@ -252,6 +252,10 @@ class ApiController {
     return await connection(method: 'get', path: "berita");
   }
 
+  Future getDataVersion() async {
+    return await connection(method: 'get', path: "version");
+  }
+
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
