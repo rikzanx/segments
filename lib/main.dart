@@ -8,6 +8,7 @@ import 'package:segments/my_function.dart';
 import 'package:segments/views/home/home.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // bool _login = false;
 void main() async {
@@ -52,6 +53,7 @@ class SplashScreen extends StatefulWidget {
 class SplashScreenState extends State<SplashScreen> {
   // int _counter = 0;
   String appVersion = "Loading...";
+  String urlDownload = "https://google.com";
   bool canContinue = false;
   @override
   void initState() {
@@ -80,13 +82,28 @@ class SplashScreenState extends State<SplashScreen> {
               child: Image.asset('assets/logoputih.png', scale: 2.5)
             ),
             Positioned(
-              bottom: 0,
+              bottom: 50,
               child: Container(
                 padding: EdgeInsets.only(bottom: tinggilayar / 15),
                 child: Text(appVersion,
                 style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold),),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                padding: EdgeInsets.only(bottom: tinggilayar / 15),
+                child: canContinue
+                    ? const Text('') // Jika canContinue true, tampilkan teks 'OK'
+                    : TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () => _launchURL(urlDownload),
+                        child: const Text("Download"),
+                      ),
               ),
             ),
             Positioned(
@@ -109,6 +126,7 @@ class SplashScreenState extends State<SplashScreen> {
       if(value.data['version'] != packageInfo.version){
         setState(() {
           appVersion = "Mohon Update Aplikasi!!!";
+          urlDownload = value.data['link_download'];
         });
       }else{
         setState(() {
@@ -145,6 +163,15 @@ class SplashScreenState extends State<SplashScreen> {
             CupertinoPageRoute(
                 builder: (BuildContext builder) => const IntroSlider()));
       }
+    }
+  }
+
+  Future<void> _launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Tidak dapat membuka URL: $url';
     }
   }
 }
