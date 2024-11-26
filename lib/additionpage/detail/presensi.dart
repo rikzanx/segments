@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:segments/class/form_component.dart';
 import 'package:segments/constant.dart';
+import 'package:segments/gpscontroller.dart';
 // import 'package:safe_device/safe_device.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:segments/apicontroller.dart';
@@ -74,7 +75,8 @@ class PresensiMasukState extends State<PresensiMasuk> {
           'lng': lng.toString(),
           'id_zona': data['karyawan']['zona']['id_zona'].toString(),
           'id_regu': data['karyawan']['regu']['id_regu'].toString(),
-          'id_jabatan': data['karyawan']['jabatan']['id_jabatan'].toString()
+          'id_jabatan': data['karyawan']['jabatan']['id_jabatan'].toString(),
+          'version' : '22'
         };
 
         if (action == "OFF") {
@@ -265,7 +267,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
         });
       }
     });
-    await ApiController().getCurrentLocation().then((value) {
+    await GpsController().getCurrentLocation().then((value) {
       if (1==1) {
         setState(() {
           lat = value.latitude;
@@ -363,7 +365,7 @@ class InfoUser extends StatelessWidget {
                         data['karyawan']['user'] != null &&
                         data['karyawan']['user']['foto'] != null
                     ? "$protokol$baseUrl/assets/foto_profil/${data['karyawan']['user']['foto']}"
-                    : 'URL_TO_DEFAULT_IMAGE', // URL gambar default jika data null
+                    : '$protokol$baseUrl/assets/foto_profil/default.png', // URL gambar default jika data null
                 fit: BoxFit.cover,
               ),
             ),

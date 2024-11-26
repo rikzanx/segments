@@ -204,7 +204,7 @@ class ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final WebViewController webViewController = WebViewController()
+    final WebViewController webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse('https://$baseUrl/maps/android/absen'));
     return Container(

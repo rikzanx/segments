@@ -5,6 +5,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:segments/apicontroller.dart';
+import 'package:segments/gpscontroller.dart';
 import 'package:segments/class/form_component.dart';
 import 'package:segments/class/public_function.dart';
 import 'package:segments/constant.dart';
@@ -303,7 +304,7 @@ class TambahLaporanState extends State<TambahLaporan> {
   }
 
   Future init() async {
-    await ApiController().getCurrentLocation().then((value) {
+    await GpsController().getCurrentLocation().then((value) {
       // print(value);
       if (1==1) {
         setState(() {

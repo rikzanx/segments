@@ -57,9 +57,7 @@ class SplashScreenState extends State<SplashScreen> {
   bool canContinue = false;
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 2500)).then((value) {
-      init();
-    });
+    init();
     super.initState();
   }
 
@@ -120,49 +118,54 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future init() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    await ApiController().getDataVersion().then((value) {
-      print("ini data version");
-      if(value.data['version'] != packageInfo.version){
-        setState(() {
-          appVersion = "Mohon Update Aplikasi!!!";
-          urlDownload = value.data['link_download'];
-        });
-      }else{
-        setState(() {
-          appVersion = "v${packageInfo.version}";
-          canContinue= true;
-        });
-      }
-    });
-    if(canContinue){
-      var value = await MyFunction().checkNik();
-      if (value) {
-        await ApiController().getUser().then((value) {
-          if (1==1) {
-            setState(() {
-              if (value.status) {
-                dataUser = value.data;
-                Navigator.pushAndRemoveUntil(context,
-                    MaterialPageRoute(builder: (context) {
-                  return const MainScreen();
-                }), (route) => false);
+    try{
+      final packageInfo = await PackageInfo.fromPlatform();
+      await ApiController().getDataVersion().then((value) {
+        print("ini data version ${packageInfo.version}");
+        if(value.data['version'] != packageInfo.version){
+          setState(() {
+            appVersion = "Mohon Update Aplikasi!!!";
+            urlDownload = value.data['link_download'];
+          });
+        }else{
+          setState(() {
+            appVersion = "v${packageInfo.version}";
+            canContinue= true;
+          });
+        }
+      });
+      if(canContinue){
+        var value = await MyFunction().checkNik();
+        if (value) {
+          await ApiController().getUser().then((value) {
+            if (1==1) {
+              setState(() {
+                if (value.status) {
+                  dataUser = value.data;
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) {
+                    return const MainScreen();
+                  }), (route) => false);
 
-                BotToast.showText(
-                    text: "Login Sukses",
-                    crossPage: true,
-                    textStyle: const TextStyle(fontSize: 14, color: Colors.white),
-                    contentColor: Colors.green);
-              }
-            });
-          }
-        });
-      } else {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(
-                builder: (BuildContext builder) => const IntroSlider()));
+                  BotToast.showText(
+                      text: "Login Sukses",
+                      crossPage: true,
+                      textStyle: const TextStyle(fontSize: 14, color: Colors.white),
+                      contentColor: Colors.green);
+                }
+              });
+            }
+          });
+        } else {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (BuildContext builder) => const IntroSlider()));
+        }
       }
+    }catch(e){
+      print("$e");
+      throw Exception("$e");
     }
   }
 
