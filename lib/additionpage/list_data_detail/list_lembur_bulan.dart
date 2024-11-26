@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur.dart';
-
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
-import 'package:segments/my_function.dart';
 
 class ListLemburBulan extends StatefulWidget {
   const ListLemburBulan({super.key});
@@ -13,7 +11,6 @@ class ListLemburBulan extends StatefulWidget {
 }
 
 class ListLemburBulanState extends State<ListLemburBulan> {
-  String _nik = '';
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -89,11 +86,7 @@ class ListLemburBulanState extends State<ListLemburBulan> {
   }
 
   init() async {
-    String nik = await MyFunction().getNik();
-    // print(nik);
-    setState(() {
-      _nik = nik;
-    });
+    // String nik = await MyFunction().getNik();
   }
 }
 

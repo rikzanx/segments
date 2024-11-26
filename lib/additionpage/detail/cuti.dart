@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:segments/class/public_function.dart';
 import 'dart:io';
 
+Map<String, dynamic> data = {};
+
 class Cuti extends StatefulWidget {
   const Cuti({super.key});
 
@@ -88,7 +90,7 @@ class CutiState extends State<Cuti> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -222,7 +224,7 @@ class CutiState extends State<Cuti> {
 
     // print(body);
     await ApiController().cutiSubmit(body).then((response) {
-      //mntd
+      if (!mounted) return;
 
       if (response.data['success']) {
         BotToast.closeAllLoading();

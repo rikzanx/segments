@@ -10,6 +10,8 @@ import 'package:segments/class/form_component.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:segments/apicontroller.dart';
 
+Map<String, dynamic> data = {};
+
 class Sakit extends StatefulWidget {
   const Sakit({super.key});
 
@@ -89,7 +91,7 @@ class SakitState extends State<Sakit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -210,7 +212,7 @@ class SakitState extends State<Sakit> {
 
     // print(body);
     await ApiController().sakitSubmit(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

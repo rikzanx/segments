@@ -109,7 +109,7 @@ class HomesState extends State<Homes> {
                             Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (BuildContext) => DetailPengumuman(
+                                    builder: (context) => DetailPengumuman(
                                           index: i,
                                           berita: data[i],
                                         )));

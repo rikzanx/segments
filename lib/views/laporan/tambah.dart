@@ -356,9 +356,9 @@ class TambahLaporanState extends State<TambahLaporan> {
       'bantuan_pengamanan': bantuanController.text,
       'foto': jsonEncode(fotoBase64)
     };
-    //mntd
+    if (!mounted) return;
     await ApiController().laporanStore(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

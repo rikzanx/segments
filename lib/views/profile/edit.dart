@@ -5,6 +5,8 @@ import 'package:segments/apicontroller.dart';
 import 'package:segments/class/form_component.dart';
 import 'package:segments/constant.dart';
 
+Map<String, dynamic> data = {};
+
 class Edit extends StatefulWidget {
   const Edit({super.key});
 
@@ -64,7 +66,7 @@ class EditState extends State<Edit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 10,
             ),
@@ -175,7 +177,7 @@ class EditState extends State<Edit> {
 
     // print(body);
     await ApiController().changePassword(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

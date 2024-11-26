@@ -7,6 +7,8 @@ import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 import 'package:segments/views/laporan/pencarian_parent.dart';
 
+Map<String, dynamic> data = {};
+
 class LemburKhususEdit extends StatefulWidget {
   final String jenisLemburKhusus;
   final String tglLemburKhusus;
@@ -49,7 +51,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
   Future timemulai() async {
     final TimeOfDay? timeMulai =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    //mntd
+    if (!mounted) return;
     if (timeMulai != null) {
       timeMulaiController.text = timeMulai.format(context);
       // print(timeMulai.format(context));
@@ -59,7 +61,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
   Future timeselesai() async {
     final TimeOfDay? timeSelesai =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    //mntd
+    if (!mounted) return;
     if (timeSelesai != null) {
       timeSelesaiController.text = timeSelesai.format(context);
       // print(timeSelesai.toString());
@@ -97,7 +99,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -237,7 +239,7 @@ class LemburKhususEditState extends State<LemburKhususEdit> {
 
     // print(body);
     await ApiController().lemburkhususEdit(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

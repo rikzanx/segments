@@ -8,6 +8,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:segments/apicontroller.dart';
 import 'package:bot_toast/bot_toast.dart';
 
+Map<String, dynamic> data = {};
+
 class PresensiMasuk extends StatefulWidget {
   const PresensiMasuk({super.key});
 
@@ -15,7 +17,6 @@ class PresensiMasuk extends StatefulWidget {
   PresensiMasukState createState() => PresensiMasukState();
 }
 
-Map<String, dynamic> data = {};
 
 class PresensiMasukState extends State<PresensiMasuk> {
   late final WebViewController webViewController = WebViewController()
@@ -40,7 +41,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
   @override
   Widget build(BuildContext context) {
     Future<void> save() async {
-      //mntd
+      if (!mounted) return;
 
       if (isMockLocation) {
         await showDialog(
@@ -89,7 +90,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
         try {
           final response = await ApiController().checkin(body);
 
-          //mntd
+          if (!mounted) return;
 
           var value = response.data;
           BotToast.closeAllLoading();
@@ -195,7 +196,7 @@ class PresensiMasukState extends State<PresensiMasuk> {
           width: lebarlayar,
           child: Column(
             children: [
-              InfoUser(),
+              InfoUser(dataUser: data,),
               SizedBox(
                 height: tinggilayar / 40,
               ),
@@ -329,12 +330,20 @@ class BoxDeskripsi extends StatelessWidget {
 }
 
 class InfoUser extends StatelessWidget {
+  final Map<String, dynamic> dataUser;
   const InfoUser({
     super.key,
+    required this.dataUser
   });
 
   @override
   Widget build(BuildContext context) {
+    final foto = dataUser['karyawan']?['user']?['foto'] ?? 'default.png';
+    final nik = dataUser['karyawan']?['user']?['nik'] ?? '';
+    final nama = dataUser['karyawan']?['nama_lengkap'] ?? '';
+    final zona = dataUser['karyawan']?['zona']?['nama_zona'] ?? '';
+    final regu = dataUser['karyawan']['regu']['nama_regu'] ?? '';
+    final jabatan = dataUser['karyawan']['jabatan']['nama_jabatan'] ?? '';
     return Container(
       padding: EdgeInsets.symmetric(horizontal: marginhorizontal),
       width: lebarlayar,
@@ -361,11 +370,7 @@ class InfoUser extends StatelessWidget {
               width: lebarlayar / 3,
               height: tinggilayar / 4,
               child: Image.network(
-                data['karyawan'] != null &&
-                        data['karyawan']['user'] != null &&
-                        data['karyawan']['user']['foto'] != null
-                    ? "$protokol$baseUrl/assets/foto_profil/${data['karyawan']['user']['foto']}"
-                    : '$protokol$baseUrl/assets/foto_profil/default.png', // URL gambar default jika data null
+                '$protokol$baseUrl/assets/foto_profil/$foto',
                 fit: BoxFit.cover,
               ),
             ),
@@ -385,11 +390,7 @@ class InfoUser extends StatelessWidget {
                             text: "NIK : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: data['karyawan'] != null &&
-                                  data['karyawan']['user'] != null &&
-                                  data['karyawan']['user']['nik'] != null
-                              ? data['karyawan']['user']['nik'].toString()
-                              : '',
+                          text: nik.toString(),
                         )
                       ],
                       style: TextStyle(
@@ -405,10 +406,7 @@ class InfoUser extends StatelessWidget {
                             text: "Nama : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: data['karyawan'] != null &&
-                                  data['karyawan']['nama_lengkap'] != null
-                              ? data['karyawan']['nama_lengkap'].toString()
-                              : '',
+                          text: nama.toString(),
                         )
                       ],
                       style: TextStyle(
@@ -424,13 +422,7 @@ class InfoUser extends StatelessWidget {
                             text: "Zona : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: data['karyawan'] != null &&
-                                    data['karyawan']['zona'] != null &&
-                                    data['karyawan']['zona']['nama_zona'] !=
-                                        null
-                                ? data['karyawan']['zona']['nama_zona']
-                                    .toString()
-                                : '',
+                            text: zona.toString(),
                             style: const TextStyle(
                               fontSize: 12,
                             ))
@@ -448,11 +440,7 @@ class InfoUser extends StatelessWidget {
                             text: "Regu : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: data['karyawan'] != null &&
-                                  data['karyawan']['regu'] != null &&
-                                  data['karyawan']['regu']['nama_regu'] != null
-                              ? data['karyawan']['regu']['nama_regu'].toString()
-                              : '',
+                          text: regu.toString(),
                         )
                       ],
                       style: TextStyle(
@@ -468,14 +456,7 @@ class InfoUser extends StatelessWidget {
                             text: "Jabatan : ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: data['karyawan'] != null &&
-                                    data['karyawan']['jabatan'] != null &&
-                                    data['karyawan']['jabatan']
-                                            ['nama_jabatan'] !=
-                                        null
-                                ? data['karyawan']['jabatan']['nama_jabatan']
-                                    .toString()
-                                : '',
+                            text: jabatan.toString(),
                             style: const TextStyle(
                               fontSize: 12,
                             )),

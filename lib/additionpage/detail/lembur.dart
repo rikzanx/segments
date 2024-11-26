@@ -7,6 +7,8 @@ import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 import 'package:segments/views/laporan/pencarian_parent.dart';
 
+Map<String, dynamic> data = {};
+
 class Lembur extends StatefulWidget {
   const Lembur({super.key});
 
@@ -37,7 +39,7 @@ class LemburState extends State<Lembur> {
   Future timemulai() async {
     final TimeOfDay? timeMulai = await showTimePicker(
         context: context, initialTime: TimeOfDay.fromDateTime(DateTime.now()));
-    //mntd
+    if (!mounted) return;
 
     if (timeMulai != null) {
       timeMulaiController.text = timeMulai.format(context);
@@ -50,7 +52,7 @@ class LemburState extends State<Lembur> {
         context: context,
         initialTime: TimeOfDay.fromDateTime(DateTime.now()
             .add(const Duration(hours: 1, minutes: 0, seconds: 0))));
-    //mntd
+    if (!mounted) return;
 
     if (timeSelesai != null) {
       timeSelesaiController.text = timeSelesai.format(context);
@@ -89,7 +91,7 @@ class LemburState extends State<Lembur> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -257,7 +259,7 @@ class LemburState extends State<Lembur> {
 
     // print(body);
     await ApiController().lemburSubmit(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

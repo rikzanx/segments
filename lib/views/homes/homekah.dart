@@ -314,7 +314,7 @@ class ContentSection extends StatelessWidget {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (BuildContext) => DetailPengumuman(
+                                  builder: (context) => DetailPengumuman(
                                         index: i,
                                         berita: data[i],
                                       )));

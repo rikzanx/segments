@@ -84,7 +84,7 @@ class SplashScreenState extends State<SplashScreen> {
               child: Container(
                 padding: EdgeInsets.only(bottom: tinggilayar / 15),
                 child: Text(appVersion,
-                style: TextStyle(
+                style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold),),
               ),
@@ -121,7 +121,6 @@ class SplashScreenState extends State<SplashScreen> {
     try{
       final packageInfo = await PackageInfo.fromPlatform();
       await ApiController().getDataVersion().then((value) {
-        print("ini data version ${packageInfo.version}");
         if(value.data['version'] != packageInfo.version){
           setState(() {
             appVersion = "Mohon Update Aplikasi!!!";
@@ -164,7 +163,6 @@ class SplashScreenState extends State<SplashScreen> {
         }
       }
     }catch(e){
-      print("$e");
       throw Exception("$e");
     }
   }

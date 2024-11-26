@@ -7,6 +7,8 @@ import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 import 'package:segments/views/laporan/pencarian_parent.dart';
 
+Map<String, dynamic> data = {};
+
 class LemburEdit extends StatefulWidget {
   final String jenisLembur;
   final String tglLembur;
@@ -103,7 +105,7 @@ class LemburEditState extends State<LemburEdit> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -243,7 +245,7 @@ class LemburEditState extends State<LemburEdit> {
 
     // print(body);
     await ApiController().lemburEdit(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

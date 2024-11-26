@@ -10,6 +10,8 @@ import 'package:segments/constant.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 
+Map<String, dynamic> data = {};
+
 class Dispensasi extends StatefulWidget {
   const Dispensasi({super.key});
 
@@ -89,7 +91,7 @@ class DispensasiState extends State<Dispensasi> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -209,7 +211,7 @@ class DispensasiState extends State<Dispensasi> {
 
     // print(body);
     await ApiController().dispensasiSubmit(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

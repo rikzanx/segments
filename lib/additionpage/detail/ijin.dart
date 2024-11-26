@@ -5,6 +5,8 @@ import 'package:segments/apicontroller.dart';
 import 'package:segments/class/form_component.dart';
 import 'package:segments/constant.dart';
 
+Map<String, dynamic> data = {};
+
 class Ijin extends StatefulWidget {
   const Ijin({super.key});
 
@@ -60,7 +62,7 @@ class IjinState extends State<Ijin> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),
@@ -154,7 +156,7 @@ class IjinState extends State<Ijin> {
 
     // print(body);
     await ApiController().ijinSubmit(body).then((response) {
-      //mntd
+      if (!mounted) return;
       if (response.data['success']) {
         BotToast.closeAllLoading();
         Navigator.pop(context);

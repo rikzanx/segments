@@ -32,8 +32,10 @@ class CustomTextFormField extends StatelessWidget {
       readOnly: isDropdown || isReadonly ? true : false,
       controller: controller,
       validator: (value) {
-        if (isRequired) if (value == null || value.isEmpty) {
-          return 'Tidak boleh kosong';
+        if (isRequired) {
+          if (value == null || value.isEmpty) {
+            return 'Tidak boleh kosong';
+          }
         }
 
         return null;

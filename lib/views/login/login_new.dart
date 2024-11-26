@@ -115,7 +115,7 @@ class LoginNewState extends State<LoginNew> {
       };
       await ApiController().login(body).then(
         (response) {
-          //mntd
+          if (!mounted) return;
           var value = response.data;
           // print(response.status);
           // print(response.data);
@@ -172,7 +172,7 @@ class LoginNewState extends State<LoginNew> {
         },
       );
     } else {
-      //mntd
+      if (!mounted) return;
       showDialog(
         context: context,
         barrierDismissible: false, // user must tap button!

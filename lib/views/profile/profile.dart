@@ -79,8 +79,7 @@ class ProfileState extends State<Profile> {
                             CircleAvatar(
                               radius: 35,
                               foregroundImage: NetworkImage(
-                                "$protokol$baseUrl/assets/foto_profil/" +
-                                    dataUser['karyawan']['user']['foto'],
+                                "$protokol$baseUrl/assets/foto_profil/${dataUser['karyawan']['user']['foto']}",
                               ),
                             ),
                             SizedBox(

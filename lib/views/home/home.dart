@@ -1,22 +1,13 @@
-// import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:segments/additionpage/absen.dart';
-// import 'package:segments/additionpage/pengajuan.dart';
 import 'package:segments/constant.dart';
-// import 'package:segments/function/route.dart';
 import 'package:segments/views/homes/homekah.dart';
-// import 'package:segments/additionpage/kehadiran.dart';
-// import 'package:segments/views/laporan/tambah.dart';
 import 'package:segments/views/list_data/list_data.dart';
 import 'package:segments/views/profile/profile.dart';
 import 'package:segments/views/schedule/schedule.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-// import 'package:segments/views/schedule/utils.dart';
-
-// import '../../my_function.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -45,6 +36,7 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ignore: deprecated_member_use
       body: WillPopScope(
         onWillPop: () {
           if (exit2 == false) {

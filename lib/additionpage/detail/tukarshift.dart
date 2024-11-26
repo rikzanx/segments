@@ -4,6 +4,8 @@ import 'package:segments/apicontroller.dart';
 import 'package:segments/class/form_component.dart';
 import 'package:segments/constant.dart';
 
+Map<String, dynamic> data = {};
+
 class TukarShift extends StatefulWidget {
   const TukarShift({super.key});
 
@@ -47,7 +49,7 @@ class TukarShiftState extends State<TukarShift> {
         width: lebarlayar,
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             const SizedBox(
               height: 20,
             ),

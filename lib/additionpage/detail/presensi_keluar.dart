@@ -7,6 +7,8 @@ import 'package:segments/class/form_component.dart';
 import 'package:segments/constant.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+Map<String, dynamic> data = {};
+
 class PresensiKeluar extends StatefulWidget {
   const PresensiKeluar({super.key});
 
@@ -34,55 +36,48 @@ class PresensiKeluarState extends State<PresensiKeluar> {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> showResponseDialog(BuildContext context, bool success, String message) async {
+      await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            title: Text(success ? 'Success' : 'Error'),
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                  if (success) Navigator.of(dialogContext).pop(true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     Future save() async {
       BotToast.showLoading();
+      try{
+        final response = await ApiController().checkout(id_presensi: id_presensi);
+        if (!mounted) return;
 
-      await ApiController().checkout(id_presensi: id_presensi).then((response) {
-        var value = response.data;
-        //mntd
-        if (value['success'] == true) {
-          BotToast.closeAllLoading();
-          showDialog(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('Succes'),
-                content: Text(value['message']),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Ok'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop(true);
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        } else {
-          BotToast.closeAllLoading();
-          showDialog(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('Error'),
-                content: Text(value['message']),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Ok'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
+        BotToast.closeAllLoading();
+        final value = response.data;
+        if(!mounted) return;
+        // ignore: use_build_context_synchronously
+        await showResponseDialog(context, value['success'], value['message']);
+      }catch (e) {
+        BotToast.closeAllLoading();
+        if (mounted) {
+          BotToast.showText(
+            text: "Something went wrong: $e",
+            contentColor: Colors.red,
           );
         }
-      });
+      }
     }
 
     return Scaffold(
@@ -117,7 +112,7 @@ class PresensiKeluarState extends State<PresensiKeluar> {
         width: lebarlayar,
         child: Column(
           children: [
-            InfoUser(),
+            InfoUser(dataUser: data,),
             SizedBox(
               height: tinggilayar / 40,
             ),
