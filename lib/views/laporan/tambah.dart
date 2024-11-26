@@ -88,7 +88,23 @@ class TambahLaporanState extends State<TambahLaporan> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text("Tambah Laporan"),
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              color: primarycolor,
+            ),
+          ),
+        ),
+        title: Text(
+          "Tambah Laporan",
+          style: TextStyle(color: primarycolor, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Form(
           key: formKey,

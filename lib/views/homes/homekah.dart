@@ -416,7 +416,7 @@ class ContentSection extends StatelessWidget {
             height: tinggilayar / 1000,
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(10.0),
             child: Container(
               height: 400,
               width: double.infinity,
@@ -426,10 +426,10 @@ class ContentSection extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5), // Set shadow color
-                    spreadRadius: 2, // Set the spread radius
-                    blurRadius: 2, // Set the blur radius
-                    offset: const Offset(0, 3), // Offset of the shadow
+                    color: Colors.grey.withOpacity(0), // Set shadow color
+                    spreadRadius: 0, // Set the spread radius
+                    blurRadius: 0, // Set the blur radius
+                    offset: const Offset(0, 0), // Offset of the shadow
                   ),
                 ],
               ),

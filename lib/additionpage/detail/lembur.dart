@@ -95,11 +95,11 @@ class LemburState extends State<Lembur> {
             const SizedBox(
               height: 20,
             ),
-            // Text(
-            //   "Total Lembur pada bulan ini: $totalLembur jam",
-            //   textAlign: TextAlign.justify,
-            //   style: TextStyle(fontSize: tinggilayar / lebarlayar * 6),
-            // ),
+            Text(
+              "Total Lembur pada bulan ini: $totalLembur jam",
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: tinggilayar / lebarlayar * 6),
+            ),
             SizedBox(
               height: tinggilayar / 40,
             ),
@@ -297,7 +297,7 @@ class LemburState extends State<Lembur> {
       if (1==1) {
         setState(() {
           data = value.data;
-          totalLembur = data["totalLembur"].toString();
+          totalLembur = data["total_lembur"].toString();
           // print("data=$data");
         });
       }

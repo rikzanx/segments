@@ -342,8 +342,8 @@ class InfoUser extends StatelessWidget {
     final nik = dataUser['karyawan']?['user']?['nik'] ?? '';
     final nama = dataUser['karyawan']?['nama_lengkap'] ?? '';
     final zona = dataUser['karyawan']?['zona']?['nama_zona'] ?? '';
-    final regu = dataUser['karyawan']['regu']['nama_regu'] ?? '';
-    final jabatan = dataUser['karyawan']['jabatan']['nama_jabatan'] ?? '';
+    final regu = dataUser['karyawan']?['regu']?['nama_regu'] ?? '';
+    final jabatan = dataUser['karyawan']?['jabatan']?['nama_jabatan'] ?? '';
     return Container(
       padding: EdgeInsets.symmetric(horizontal: marginhorizontal),
       width: lebarlayar,

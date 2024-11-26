@@ -278,6 +278,7 @@ class ProfileState extends State<Profile> {
                 Positioned(
                   right: 32,
                   child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
                       onPressed: () async {
                         await MyFunction().logout();
                         Navigator.pushAndRemoveUntil(context,
@@ -285,7 +286,11 @@ class ProfileState extends State<Profile> {
                           return const LoginNew();
                         }), (route) => false);
                       },
-                      child: const Icon(Icons.logout)),
+                      child: Icon(
+                          Icons.logout,
+                          color: primarycolor,
+                        )
+                      ),
                 ),
                 //EDIT
                 Positioned(
