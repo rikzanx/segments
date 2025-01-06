@@ -10,8 +10,12 @@ class ListLemburDetail extends StatefulWidget {
   final String nik;
   final String judul;
   final String bulan;
+  final String tahun;
   const ListLemburDetail(
-      {super.key, required this.tipe, required this.nik, required this.judul, required this.bulan});
+      {super.key, required this.tipe, required this.nik, required this.judul, 
+      required this.bulan,
+      required this.tahun
+      });
 
   @override
   ListLemburDetailState createState() => ListLemburDetailState();
@@ -24,17 +28,19 @@ class ListLemburDetailState extends State<ListLemburDetail> {
   String _tipe = '0';
   String _judul = '';
   String _bulan = '';
+  String _tahun = '0';
   int position = 1;
   int sumtotaljamlembur = 0;
   List<dynamic> _dataLembur = [];
   @override
   void initState() {
     // init();
-    _getDataLembur(widget.tipe.toString(), widget.nik,widget.bulan);
+    _getDataLembur(widget.tipe.toString(), widget.nik,widget.bulan,widget.tahun);
     _tipe = widget.tipe;
     _nik = widget.nik;
     _judul = widget.judul;
     _bulan = widget.bulan;
+    _tahun = widget.tahun;
     super.initState();
   }
 
@@ -138,6 +144,7 @@ class ListLemburDetailState extends State<ListLemburDetail> {
                     tglLembur: data['tgl_lembur'].toString(),
                     mulai: data['mulai'].toString().substring(0, 5),
                     selesai: data['selesai'].toString().substring(0, 5),
+                    detailLembur: data['detail_lembur'].toString(),
                   ));
             },
             child: const Text(
@@ -175,8 +182,8 @@ class ListLemburDetailState extends State<ListLemburDetail> {
     });
   }
 
-  Future _getDataLembur(String tipe, String nik,String bulan) async {
-    Map<String, String> body = {'tipe': tipe, 'nik': nik,'id_bulan':bulan};
+  Future _getDataLembur(String tipe, String nik,String bulan,String tahun) async {
+    Map<String, String> body = {'tipe': tipe, 'nik': nik,'id_bulan':bulan,'tahun': tahun};
     var response = await ApiController().getDataLembur(body);
     if (response.status) {
       if (response.data.length > 0) {

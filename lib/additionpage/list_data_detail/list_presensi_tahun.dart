@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:segments/additionpage/list_data_detail/list_lembur.dart';
+import 'package:segments/additionpage/list_data_detail/list_presensi.dart';
+import 'package:segments/additionpage/list_data_detail/list_presensi_detail.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
+import 'package:segments/my_function.dart';
 
-class ListLemburBulan extends StatefulWidget {
-  final String tahun;
-  const ListLemburBulan({super.key, required this.tahun});
+class ListPresensiTahun extends StatefulWidget {
+  const ListPresensiTahun({super.key});
 
   @override
-  ListLemburBulanState createState() => ListLemburBulanState();
+  ListPresensiTahunState createState() => ListPresensiTahunState();
 }
 
-class ListLemburBulanState extends State<ListLemburBulan> {
-  String _tahun = DateTime.now().year.toString();
+class ListPresensiTahunState extends State<ListPresensiTahun> {
+  String _nik = '';
+  int currentYear = DateTime.now().year;
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -27,14 +29,8 @@ class ListLemburBulanState extends State<ListLemburBulan> {
     11: 'November',
     12: 'Desember'
   };
-  Map<int, String> tipe = {
-    0: 'Belum Validasi',
-    1: 'Sudah Validasi',
-    2: 'Ditolak',
-  };
   @override
   void initState() {
-    _tahun = widget.tahun;
     super.initState();
 
     init();
@@ -57,10 +53,10 @@ class ListLemburBulanState extends State<ListLemburBulan> {
               Navigator.pop(context);
             },
           ),
-          backgroundColor: primarycolor, // Set the desired green color
+          backgroundColor: primarycolor,
           elevation: 0,
           title: const Text(
-            "List Lembur",
+            "List Presensi",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -71,26 +67,28 @@ class ListLemburBulanState extends State<ListLemburBulan> {
             mainAxisAlignment: MainAxisAlignment.start,
             direction: Axis.vertical,
             children: [
-              for (int i = 1; i <= bulan.length; i++)
-                LitleCardFunction(
-                    fungsi: () {
-                      pindahPageCupertino(
-                          context,
-                          ListLembur(
-                            tahun: _tahun.toString(),
-                            bulan: i.toString(),
-                            namabulan: bulan[i].toString(),
-                            judul: "Lembur Bulan ${bulan[i]}",
-                          ));
-                    },
-                    judul: "${bulan[i].toString()} - ${_tahun}"),
-            ],
-          ),
+                  for (int i = 0; i <= 5; i++)
+                  LitleCardFunction(
+                      fungsi: () {
+                        pindahPageCupertino(
+                            context,
+                            ListPresensi(
+                              tahun: (currentYear - i).toString(),
+                            ));
+                      },
+                      judul: (currentYear - i).toString()
+                  ),
+                ],
+              ),
         ));
   }
 
   init() async {
-    // String nik = await MyFunction().getNik();
+    String nik = await MyFunction().getNik();
+    // print(nik);
+    setState(() {
+      _nik = nik;
+    });
   }
 }
 

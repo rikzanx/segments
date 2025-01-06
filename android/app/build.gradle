@@ -11,8 +11,8 @@ android {
     ndkVersion = flutter.compileSdkVersion
 
     lint {
-          baseline = file("lint-baseline.xml")
-      }
+        baseline = file("lint-baseline.xml")
+    }
 
     lintOptions {
         abortOnError false
@@ -49,6 +49,7 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
 }
 
 flutter {

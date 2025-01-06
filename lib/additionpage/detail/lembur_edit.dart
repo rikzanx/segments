@@ -15,6 +15,7 @@ class LemburEdit extends StatefulWidget {
   final String mulai;
   final String selesai;
   final String idLembur;
+  final String detailLembur;
 
   const LemburEdit(
       {super.key,
@@ -22,7 +23,8 @@ class LemburEdit extends StatefulWidget {
       required this.mulai,
       required this.selesai,
       required this.tglLembur,
-      required this.idLembur});
+      required this.idLembur,
+      required this.detailLembur});
 
   @override
   LemburEditState createState() => LemburEditState();
@@ -41,7 +43,7 @@ class LemburEditState extends State<LemburEdit> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2050),
     );
     if (tgl != null) {
       setState(() {
@@ -189,6 +191,26 @@ class LemburEditState extends State<LemburEdit> {
               ],
             )),
             const SizedBox(
+              height: 16,
+            ),
+            myContainer(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  label("Deskripsi"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextFormField(
+                    isLongText: true,
+                    controller: deskripsiController,
+                    placeholder: "Masukkan Deskripsi",
+                    isRequired: true,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
               height: 32,
             ),
             PrimaryButton(
@@ -241,6 +263,7 @@ class LemburEditState extends State<LemburEdit> {
       'jenis_lembur': jenisLemburController.text,
       'mulai': timeMulaiController.text,
       'selesai': timeSelesaiController.text,
+      'detail_lembur': deskripsiController.text,
     };
 
     // print(body);
@@ -283,6 +306,7 @@ class LemburEditState extends State<LemburEdit> {
     dateController = TextEditingController(text: widget.tglLembur);
     timeMulaiController = TextEditingController(text: widget.mulai);
     timeSelesaiController = TextEditingController(text: widget.selesai);
+    deskripsiController = TextEditingController(text: widget.detailLembur);
     await ApiController().getUser().then((value) {
       if (1==1) {
         setState(() {

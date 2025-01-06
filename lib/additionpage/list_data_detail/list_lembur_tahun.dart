@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur.dart';
+import 'package:segments/additionpage/list_data_detail/list_lembur_bulan.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 
-class ListLemburBulan extends StatefulWidget {
-  final String tahun;
-  const ListLemburBulan({super.key, required this.tahun});
+class ListLemburTahun extends StatefulWidget {
+  const ListLemburTahun({super.key});
 
   @override
-  ListLemburBulanState createState() => ListLemburBulanState();
+  ListLemburTahunState createState() => ListLemburTahunState();
 }
 
-class ListLemburBulanState extends State<ListLemburBulan> {
-  String _tahun = DateTime.now().year.toString();
+class ListLemburTahunState extends State<ListLemburTahun> {
+  int currentYear = DateTime.now().year;
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -34,7 +34,6 @@ class ListLemburBulanState extends State<ListLemburBulan> {
   };
   @override
   void initState() {
-    _tahun = widget.tahun;
     super.initState();
 
     init();
@@ -71,19 +70,16 @@ class ListLemburBulanState extends State<ListLemburBulan> {
             mainAxisAlignment: MainAxisAlignment.start,
             direction: Axis.vertical,
             children: [
-              for (int i = 1; i <= bulan.length; i++)
+              for (int i = 0; i <= 5; i++)
                 LitleCardFunction(
                     fungsi: () {
                       pindahPageCupertino(
                           context,
-                          ListLembur(
-                            tahun: _tahun.toString(),
-                            bulan: i.toString(),
-                            namabulan: bulan[i].toString(),
-                            judul: "Lembur Bulan ${bulan[i]}",
+                          ListLemburBulan(
+                            tahun: (currentYear - i).toString(),
                           ));
                     },
-                    judul: "${bulan[i].toString()} - ${_tahun}"),
+                    judul: (currentYear - i).toString()),
             ],
           ),
         ));

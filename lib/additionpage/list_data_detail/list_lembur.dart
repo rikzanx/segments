@@ -9,8 +9,9 @@ class ListLembur extends StatefulWidget {
   final String bulan;
   final String namabulan;
   final String judul;
+  final String tahun;
   const ListLembur(
-      {super.key,required this.bulan,required this.namabulan,required this.judul});
+      {super.key,required this.bulan,required this.namabulan,required this.judul,required this.tahun});
 
   @override
   ListLemburState createState() => ListLemburState();
@@ -21,6 +22,7 @@ class ListLemburState extends State<ListLembur> {
   String _judul = '';
   String _bulan = '';
   String _namabulan = '';
+  String _tahun = DateTime.now().year.toString();
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -46,6 +48,7 @@ class ListLemburState extends State<ListLembur> {
     _bulan = widget.bulan;
     _namabulan = widget.namabulan;
     _judul = widget.judul;
+    _tahun = widget.tahun;
     init();
   }
 
@@ -86,6 +89,7 @@ class ListLemburState extends State<ListLembur> {
                       pindahPageCupertino(
                           context,
                           ListLemburDetail(
+                            tahun: _tahun.toString(),
                             tipe: i.toString(),
                             nik: _nik.toString(),
                             bulan: _bulan.toString(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/list_data_detail/list_absen.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur_bulan.dart';
+import 'package:segments/additionpage/list_data_detail/list_lembur_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/list_presensi.dart';
+import 'package:segments/additionpage/list_data_detail/list_presensi_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/penilaian_kinerja.dart';
 import 'package:segments/additionpage/list_data_detail/slip_gaji.dart';
 import 'package:segments/constant.dart';
@@ -42,7 +44,7 @@ class ListDataState extends State<ListData> {
                 ),
                 fungsi: () {
                   // MyFunction().belumTersedia();
-                  pindahPageCupertino(context, const ListPresensi());
+                  pindahPageCupertino(context, const ListPresensiTahun());
                 },
                 judul: "List Presensi",
                 deskripsi: "Ini Deksripsi",
@@ -71,7 +73,7 @@ class ListDataState extends State<ListData> {
                   fit: BoxFit.cover,
                 ),
                 fungsi: () {
-                  pindahPageCupertino(context, const ListLemburBulan());
+                  pindahPageCupertino(context, const ListLemburTahun());
                   // MyFunction().belumTersedia();
                 },
                 judul: "List Lembur",

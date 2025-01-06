@@ -9,8 +9,9 @@ class ListPresensiDetail extends StatefulWidget {
   final String bulan;
   final String nik;
   final String judul;
+  final String tahun;
   const ListPresensiDetail(
-      {super.key, required this.bulan, required this.nik, required this.judul});
+      {super.key, required this.bulan, required this.nik, required this.judul, required this.tahun});
 
   @override
   ListPresensiDetailState createState() => ListPresensiDetailState();
@@ -35,9 +36,10 @@ class ListPresensiDetailState extends State<ListPresensiDetail> {
       },
     ))
     ..loadRequest(Uri.parse(
-        'https://$baseUrl/webview/detail_presensi/$_bulan?nik=$_nik'));
+        'https://$baseUrl/webview/detail_presensi/$_bulan?nik=$_nik&tahun=$_tahun'));
   String _nik = '';
   String _bulan = '1';
+  String _tahun = DateTime.now().year.toString();
 
   // ignore: unused_field
   String _judul = '';
@@ -48,6 +50,7 @@ class ListPresensiDetailState extends State<ListPresensiDetail> {
     _bulan = widget.bulan;
     _nik = widget.nik;
     _judul = widget.judul;
+    _tahun = widget.tahun;
     super.initState();
   }
 
@@ -88,6 +91,7 @@ class ListPresensiDetailState extends State<ListPresensiDetail> {
     setState(() {
       _nik = nik;
       _bulan = widget.bulan;
+      _tahun = widget.tahun;
     });
   }
 }
