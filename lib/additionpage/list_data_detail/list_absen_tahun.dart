@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:segments/additionpage/list_data_detail/penilaian_kinerja_detail.dart';
+import 'package:segments/additionpage/list_data_detail/list_absen.dart';
+import 'package:segments/additionpage/list_data_detail/list_absen_detail.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 import 'package:segments/my_function.dart';
 
-class PenilaianKinerja extends StatefulWidget {
-  final String tahun;
-  const PenilaianKinerja({super.key, required this.tahun});
+class ListAbsenTahun extends StatefulWidget {
+  const ListAbsenTahun({super.key});
 
   @override
-  PenilaianKinerjaState createState() => PenilaianKinerjaState();
+  ListAbsenTahunState createState() => ListAbsenTahunState();
 }
 
-class PenilaianKinerjaState extends State<PenilaianKinerja> {
+class ListAbsenTahunState extends State<ListAbsenTahun> {
   String _nik = '';
-  String _tahun = DateTime.now().year.toString();
+  int currentYear = DateTime.now().year;
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -29,9 +29,13 @@ class PenilaianKinerjaState extends State<PenilaianKinerja> {
     11: 'November',
     12: 'Desember'
   };
+  Map<int, String> tipe = {
+    0: 'Belum Validasi',
+    1: 'Sudah Validasi',
+    2: 'Ditolak',
+  };
   @override
   void initState() {
-    _tahun = widget.tahun;
     super.initState();
 
     init();
@@ -57,7 +61,7 @@ class PenilaianKinerjaState extends State<PenilaianKinerja> {
           backgroundColor: primarycolor,
           elevation: 0,
           title: const Text(
-            "Penilaian Kinerja",
+            "List Absen",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -68,19 +72,16 @@ class PenilaianKinerjaState extends State<PenilaianKinerja> {
             mainAxisAlignment: MainAxisAlignment.start,
             direction: Axis.vertical,
             children: [
-              for (int i = 1; i <= bulan.length; i++)
+              for (int i = 0; i <= 5; i++)
                 LitleCardFunction(
                     fungsi: () {
                       pindahPageCupertino(
                           context,
-                          PenilaianKinerjaDetail(
-                            bulan: i.toString(),
-                            nik: _nik.toString(),
-                            judul: "Presensi Bulan ${bulan[i]}",
-                            tahun: _tahun.toString(),
+                          ListAbsen(
+                            tahun: (currentYear - i).toString(),
                           ));
                     },
-                    judul: "${bulan[i].toString()} - ${_tahun}"
+                    judul: (currentYear - i).toString()
                 ),
             ],
           ),

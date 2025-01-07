@@ -9,8 +9,9 @@ class PenilaianKinerjaDetail extends StatefulWidget {
   final String bulan;
   final String nik;
   final String judul;
+  final String tahun;
   const PenilaianKinerjaDetail(
-      {super.key, required this.bulan, required this.nik, required this.judul});
+      {super.key, required this.bulan, required this.nik, required this.judul, required this.tahun});
 
   @override
   PenilaianKinerjaDetailState createState() => PenilaianKinerjaDetailState();
@@ -35,19 +36,21 @@ class PenilaianKinerjaDetailState extends State<PenilaianKinerjaDetail> {
       },
     ))
     ..loadRequest(Uri.parse(
-        'http://$baseUrl/webview/detail_penilaian_kinerja/$_bulan?nik=$_nik'));
+        'http://$baseUrl/webview/detail_penilaian_kinerja/$_bulan?nik=$_nik&year=$_tahun'));
   String _nik = '';
   String _bulan = '1';
 
   // ignore: unused_field
   String _judul = '';
   int position = 1;
+  String _tahun = DateTime.now().year.toString();
   @override
   void initState() {
     // init();
     _bulan = widget.bulan;
     _nik = widget.nik;
     _judul = widget.judul;
+    _tahun = widget.tahun;
     super.initState();
   }
 

@@ -380,7 +380,7 @@ class LoginNewState extends State<LoginNew> {
         borderRadius: BorderRadius.circular(8), // Adjust as needed
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(239, 45, 155, 47),
+            backgroundColor: primarycolor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4), // Adjust as needed
             ),

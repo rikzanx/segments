@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:segments/additionpage/list_data_detail/list_absen.dart';
+import 'package:segments/additionpage/list_data_detail/list_absen_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur_bulan.dart';
 import 'package:segments/additionpage/list_data_detail/list_lembur_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/list_presensi.dart';
 import 'package:segments/additionpage/list_data_detail/list_presensi_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/penilaian_kinerja.dart';
+import 'package:segments/additionpage/list_data_detail/penilaian_kinerja_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/slip_gaji.dart';
+import 'package:segments/additionpage/list_data_detail/slip_gaji_tahun.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 
@@ -58,7 +61,7 @@ class ListDataState extends State<ListData> {
                   fit: BoxFit.cover,
                 ),
                 fungsi: () {
-                  pindahPageCupertino(context, const ListAbsen());
+                  pindahPageCupertino(context, const ListAbsenTahun());
                   // MyFunction().belumTersedia();
                 },
                 judul: "List Absen",
@@ -88,7 +91,7 @@ class ListDataState extends State<ListData> {
                   fit: BoxFit.cover,
                 ),
                 fungsi: () {
-                  pindahPageCupertino(context, const SlipGaji());
+                  pindahPageCupertino(context, const SlipGajiTahun());
                   // MyFunction().belumTersedia();
                 },
                 judul: "Slip Gaji",
@@ -103,7 +106,7 @@ class ListDataState extends State<ListData> {
                   fit: BoxFit.cover,
                 ),
                 fungsi: () {
-                  pindahPageCupertino(context, const PenilaianKinerja());
+                  pindahPageCupertino(context, const PenilaianKinerjaTahun());
                   // MyFunction().belumTersedia();
                 },
                 judul: "Penilaian Kinerja",

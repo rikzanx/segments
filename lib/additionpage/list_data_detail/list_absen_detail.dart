@@ -7,8 +7,9 @@ class ListAbsenDetail extends StatefulWidget {
   final String tipe;
   final String nik;
   final String judul;
+  final String tahun;
   const ListAbsenDetail(
-      {super.key, required this.tipe, required this.nik, required this.judul});
+      {super.key, required this.tipe, required this.nik, required this.judul, required this.tahun});
 
   @override
   ListAbsenDetailState createState() => ListAbsenDetailState();
@@ -21,14 +22,16 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
   String _tipe = '0';
   String _judul = '';
   int position = 1;
+  String _tahun = DateTime.now().year.toString();
   List<dynamic> _dataAbsen = [];
   @override
   void initState() {
     // init();
-    _getDataAbsen(widget.tipe.toString(), widget.nik);
+    _getDataAbsen(widget.tipe.toString(), widget.nik, widget.tahun);
     _tipe = widget.tipe;
     _nik = widget.nik;
     _judul = widget.judul;
+    _tahun = widget.tahun;
     super.initState();
   }
 
@@ -94,6 +97,7 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
       const DataColumn(label: Text('NIK')),
       const DataColumn(label: Text('Nama')),
       const DataColumn(label: Text('Tipe Absen')),
+      const DataColumn(label: Text('Detail')),
       const DataColumn(label: Text('Kajaga')),
     ];
   }
@@ -109,6 +113,7 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
           DataCell(Text(data['nik'])),
           DataCell(Text(data['karyawan']['nama_lengkap'])),
           DataCell(Text(data['tipe_absen'])),
+          DataCell(Text(data['detail'])),
           const DataCell(Text(""))
         ]);
       }).toList();
@@ -116,6 +121,7 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
       return [
         const DataRow(cells: [
           DataCell(Text('Data Tidak ada')),
+          DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),
@@ -132,11 +138,12 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
     setState(() {
       _nik = nik;
       _tipe = widget.tipe;
+      _tahun = widget.tahun;
     });
   }
 
-  Future _getDataAbsen(String tipe, String nik) async {
-    Map<String, String> body = {'tipe': tipe, 'nik': nik};
+  Future _getDataAbsen(String tipe, String nik, String tahun) async {
+    Map<String, String> body = {'tipe': tipe, 'nik': nik, 'tahun': tahun};
     var response = await ApiController().getDataAbsen(body);
     if (response.status) {
       if (response.data.length > 0) {

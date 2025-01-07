@@ -230,7 +230,9 @@ class PresensiMasukState extends State<PresensiMasuk> {
                         fillColor: Colors.grey[200],
                         suffixIcon: const Icon(Icons.calendar_today),
                         hintText:
-                            "|${data['jadwal']['action']}|  ${data['jadwal']['jam_masuk']} - ${data['jadwal']['jam_keluar']}",
+                        (data['jadwal'] != null && data['jadwal']['action'] != null)
+                        ? "|${data['jadwal']['action']}|  ${data['jadwal']['jam_masuk']} - ${data['jadwal']['jam_keluar']}"
+                        : '-',
                         filled: true,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),

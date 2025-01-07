@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:segments/additionpage/list_data_detail/penilaian_kinerja_detail.dart';
+import 'package:segments/additionpage/list_data_detail/slip_gaji_detail.dart';
+import 'package:segments/additionpage/list_data_detail/slip_gaji.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 import 'package:segments/my_function.dart';
 
-class PenilaianKinerja extends StatefulWidget {
-  final String tahun;
-  const PenilaianKinerja({super.key, required this.tahun});
+class SlipGajiTahun extends StatefulWidget {
+  const SlipGajiTahun({super.key});
 
   @override
-  PenilaianKinerjaState createState() => PenilaianKinerjaState();
+  SlipGajiTahunState createState() => SlipGajiTahunState();
 }
 
-class PenilaianKinerjaState extends State<PenilaianKinerja> {
+class SlipGajiTahunState extends State<SlipGajiTahun> {
   String _nik = '';
-  String _tahun = DateTime.now().year.toString();
+  int currentYear = DateTime.now().year;
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -31,7 +31,6 @@ class PenilaianKinerjaState extends State<PenilaianKinerja> {
   };
   @override
   void initState() {
-    _tahun = widget.tahun;
     super.initState();
 
     init();
@@ -57,7 +56,7 @@ class PenilaianKinerjaState extends State<PenilaianKinerja> {
           backgroundColor: primarycolor,
           elevation: 0,
           title: const Text(
-            "Penilaian Kinerja",
+            "Slip Gaji",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -68,20 +67,16 @@ class PenilaianKinerjaState extends State<PenilaianKinerja> {
             mainAxisAlignment: MainAxisAlignment.start,
             direction: Axis.vertical,
             children: [
-              for (int i = 1; i <= bulan.length; i++)
+              for (int i = 0; i <= 5; i++)
                 LitleCardFunction(
                     fungsi: () {
                       pindahPageCupertino(
                           context,
-                          PenilaianKinerjaDetail(
-                            bulan: i.toString(),
-                            nik: _nik.toString(),
-                            judul: "Presensi Bulan ${bulan[i]}",
-                            tahun: _tahun.toString(),
+                          SlipGaji(
+                            tahun: (currentYear - i).toString(),
                           ));
                     },
-                    judul: "${bulan[i].toString()} - ${_tahun}"
-                ),
+                    judul: (currentYear - i).toString()),
             ],
           ),
         ));

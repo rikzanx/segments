@@ -5,7 +5,8 @@ import 'package:segments/function/route.dart';
 import 'package:segments/my_function.dart';
 
 class SlipGaji extends StatefulWidget {
-  const SlipGaji({super.key});
+  final String tahun;
+  const SlipGaji({super.key, required this.tahun});
 
   @override
   SlipGajiState createState() => SlipGajiState();
@@ -13,6 +14,7 @@ class SlipGaji extends StatefulWidget {
 
 class SlipGajiState extends State<SlipGaji> {
   String _nik = '';
+  String _tahun = DateTime.now().year.toString();
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -29,6 +31,7 @@ class SlipGajiState extends State<SlipGaji> {
   };
   @override
   void initState() {
+    _tahun = widget.tahun;
     super.initState();
 
     init();
@@ -74,9 +77,10 @@ class SlipGajiState extends State<SlipGaji> {
                             bulan: i.toString(),
                             nik: _nik.toString(),
                             judul: "Presensi Bulan ${bulan[i]}",
+                            tahun: _tahun.toString(),
                           ));
                     },
-                    judul: bulan[i].toString()),
+                    judul: "${bulan[i].toString()} - ${_tahun}"),
             ],
           ),
         ));

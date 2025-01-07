@@ -5,7 +5,8 @@ import 'package:segments/function/route.dart';
 import 'package:segments/my_function.dart';
 
 class ListAbsen extends StatefulWidget {
-  const ListAbsen({super.key});
+  final String tahun;
+  const ListAbsen({super.key, required this.tahun});
 
   @override
   ListAbsenState createState() => ListAbsenState();
@@ -13,6 +14,7 @@ class ListAbsen extends StatefulWidget {
 
 class ListAbsenState extends State<ListAbsen> {
   String _nik = '';
+  String _tahun = DateTime.now().year.toString();
   Map<int, String> bulan = {
     1: 'Januari',
     2: 'Februari',
@@ -79,9 +81,11 @@ class ListAbsenState extends State<ListAbsen> {
                             tipe: i.toString(),
                             nik: _nik.toString(),
                             judul: "Absen yang ${tipe[i]}",
+                            tahun: _tahun.toString(),
                           ));
                     },
-                    judul: tipe[i].toString()),
+                    judul: tipe[i].toString()
+                ),
             ],
           ),
         ));
@@ -92,6 +96,7 @@ class ListAbsenState extends State<ListAbsen> {
     // print(nik);
     setState(() {
       _nik = nik;
+      _tahun = widget.tahun;
     });
   }
 }
