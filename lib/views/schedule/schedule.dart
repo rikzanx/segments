@@ -27,6 +27,11 @@ class ScheduleState extends State<Schedule> {
     super.initState();
     // setkEvents();
     _selectedEvents = ValueNotifier([]);
+    fetchEvents().then((events) {
+      // print("ini ------------------");
+      // print(events);
+      _selectedEvents.value = events;
+    });
     setkEvents();
     init();
     _getEventsForDay(DateTime.now());
@@ -53,6 +58,7 @@ class ScheduleState extends State<Schedule> {
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
+    
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
@@ -60,8 +66,10 @@ class ScheduleState extends State<Schedule> {
         // _rangeEnd = null;
         // _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
-
       _selectedEvents.value = _getEventsForDay(selectedDay);
+      // print(_selectedEvents);
+    }else{
+      // print("selected day gak oke");
     }
   }
 
@@ -114,7 +122,7 @@ class ScheduleState extends State<Schedule> {
         }
 
         // Setelah data siap, tampilkan kalender dan daftar event
-        _selectedEvents.value = snapshot.data!;
+        // _selectedEvents.value = snapshot.data!;
 
         return Column(
           children: [
