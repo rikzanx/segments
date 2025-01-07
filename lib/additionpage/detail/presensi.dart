@@ -371,6 +371,25 @@ class InfoUser extends StatelessWidget {
               height: tinggilayar / 4,
               child: Image.network(
                 '$protokol$baseUrl/assets/foto_profil/$foto',
+                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                          : null,
+                    ),
+                  );
+                },
+                errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                  return Image.asset(
+                    'assets/images/default.png',
+                    fit: BoxFit.cover,
+                  );
+                },
                 fit: BoxFit.cover,
               ),
             ),

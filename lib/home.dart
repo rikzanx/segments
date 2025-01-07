@@ -88,6 +88,25 @@ class HomesState extends State<Homes> {
                                 tag: "gambar$i",
                                 child: Image.network(
                                   "https://asset.kompas.com/crops/xH4ZacmnhLzdDQ3QqQ2pUFCEbUc=/0x0:0x0/750x500/data/photo/2021/08/15/6118e55147fb1.jpg",
+                                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress.expectedTotalBytes != null
+                                            ? loadingProgress.cumulativeBytesLoaded /
+                                                (loadingProgress.expectedTotalBytes ?? 1)
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                                    return Image.asset(
+                                      'assets/images/default.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -112,7 +131,7 @@ class HomesState extends State<Homes> {
                                 top: lebarlayar / 50,
                                 right: lebarlayar / 30),
                             child: Text(
-                              "JAKARTA, KOMPAS.com - Menteri Badan Usaha Milik Negara (BUMN) Erick Thohir mengatakan, PT Petrokimia Gresik telah mengaktifkan kembali pabrik produksi oksigen Air Separation Plant (ASP). Hal ini dilakukan melihat tingginya kebutuhan oksigen untuk penanganan para pasien Covid-19 di Indonesia. ",
+                              "Test",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -177,7 +196,7 @@ class HomesState extends State<Homes> {
                             "Deskripsi dari laporan penjelas dari kegiatan atau hasil approval dari beberapa stakeholder",
                         publisher: "Admin",
                         image:
-                            "https://img.okezone.com/content/2019/07/28/320/2084629/petrokimia-gresik-buka-lowongan-kerja-sebagai-pahlawan-solusi-agroindustri-TVETDvYDBK.png",
+                            "https://sikekar.keamanan-pg.com/assets/images/login/new_icon.png",
                       ),
                     );
                   }),
@@ -239,6 +258,25 @@ class CardWithImage extends StatelessWidget {
                   tag: "gmbr${index!}",
                   child: Image.network(
                     image!,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    },
+                    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                      return Image.asset(
+                        'assets/images/default.png',
+                        fit: BoxFit.cover,
+                      );
+                    },
                     fit: BoxFit.cover,
                   ),
                 ),

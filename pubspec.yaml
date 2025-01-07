@@ -112,13 +112,14 @@ flutter:
     - assets/logowarna.png
     - assets/masukk.png
     - assets/pengajuan.png
-    - assets/pgputih.png
     - assets/sakit.png
     - assets/tukarshift.png
     - assets/penilaiankinerja.png
     - assets/not-available.png
     - assets/home_background.png
     - assets/login_background.png
+    - assets/default_profile.png
+    - assets/default.png
 
   fonts:
     - family: Poppins

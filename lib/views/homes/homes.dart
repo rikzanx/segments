@@ -143,6 +143,25 @@ class HomesState extends State<Homes> {
                                       tag: "gambar$i",
                                       child: Image.network(
                                         data[i].link_gambar,
+                                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          }
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              value: loadingProgress.expectedTotalBytes != null
+                                                  ? loadingProgress.cumulativeBytesLoaded /
+                                                      (loadingProgress.expectedTotalBytes ?? 1)
+                                                  : null,
+                                            ),
+                                          );
+                                        },
+                                        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                                          return Image.asset(
+                                            'assets/images/default.png',
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -355,6 +374,25 @@ class CardWithImage extends StatelessWidget {
                   tag: "gmbr${index!}",
                   child: Image.network(
                     image!,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    },
+                    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                      return Image.asset(
+                        'assets/images/default.png',
+                        fit: BoxFit.cover,
+                      );
+                    },
                     fit: BoxFit.cover,
                   ),
                 ),

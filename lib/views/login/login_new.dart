@@ -226,20 +226,6 @@ class LoginNewState extends State<LoginNew> {
     );
   }
 
-  // Widget buildCompanyImages() {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(top: 20.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: <Widget>[
-  //         buildImageAsset(LoginAssets.bumnLogo),
-  //         buildImageAsset(LoginAssets.pupukIndonesiaLogo),
-  //         buildImageAsset(LoginAssets.petrokimiaGresikLogo),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget buildAppLogo() {
     return Image.asset(
       'assets/logowarna.png',

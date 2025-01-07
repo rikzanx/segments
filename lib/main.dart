@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
-      title: 'Segments SecurityPG',
+      title: 'Segments',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         bottomSheetTheme:
@@ -102,13 +102,6 @@ class SplashScreenState extends State<SplashScreen> {
                         onPressed: () => _launchURL(urlDownload),
                         child: const Text("Download"),
                       ),
-              ),
-            ),
-            Positioned(
-              top: 50,
-              child: Container(
-                padding: EdgeInsets.only(bottom: tinggilayar / 15),
-                child: Image.asset('assets/pgputih.png', scale: 5.5),
               ),
             ),
           ],

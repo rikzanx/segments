@@ -148,7 +148,7 @@ class CariState extends State<Cari> {
                                     "Deskripsi dari laporan penjelas dari kegiatan atau hasil approval dari beberapa stakeholder",
                                 publisher: "Admin",
                                 image:
-                                    "https://img.okezone.com/content/2019/07/28/320/2084629/petrokimia-gresik-buka-lowongan-kerja-sebagai-pahlawan-solusi-agroindustri-TVETDvYDBK.png",
+                                    "https://sikekar.keamanan-pg.com/assets/images/login/new_icon.png",
                               ),
                             );
                           },
