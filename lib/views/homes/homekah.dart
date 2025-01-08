@@ -16,6 +16,7 @@ import 'package:segments/views/schedule/utils.dart';
 import 'package:segments/models/laporan.dart';
 import 'package:segments/views/home/detail_laporan/detail_laporan.dart';
 import 'package:segments/views/home/detail_pengumuman/detail_pengumuman.dart';
+import 'package:segments/additionpage/list_data_detail/maps_fullscreen.dart';
 
 class Homekah extends StatefulWidget {
   const Homekah({super.key});
@@ -206,6 +207,7 @@ class ContentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final WebViewController webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(Colors.transparent)
       ..loadRequest(Uri.parse('https://$baseUrl/maps/android/absen'));
     return Container(
       width: double.infinity,
@@ -427,6 +429,16 @@ class ContentSection extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: tinggilayar / lebarlayar * 8),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    pindahPageCupertino(context, const MapsFullscreen());
+                  },
+                  child: Text(
+                      "Click to Fullscreen",
+                      style: TextStyle(
+                          fontSize: tinggilayar / lebarlayar * 5),
+                    ),
                 ),
               ],
             ),

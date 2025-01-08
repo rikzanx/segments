@@ -20,6 +20,7 @@ class PenilaianKinerjaDetail extends StatefulWidget {
 class PenilaianKinerjaDetailState extends State<PenilaianKinerjaDetail> {
   late final WebViewController webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(Colors.transparent)
     ..setNavigationDelegate(NavigationDelegate(
       onProgress: (int progress) {
         // Update loading bar.

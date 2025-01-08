@@ -24,6 +24,7 @@ class TambahLaporan extends StatefulWidget {
 class TambahLaporanState extends State<TambahLaporan> {
   late final WebViewController webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(Colors.transparent)
     ..loadRequest(Uri.parse('https://$baseUrl/maps/android?lat=$lat&lng=$lng'));
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();

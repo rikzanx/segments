@@ -1,24 +1,18 @@
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_launcher_icons/config/web_config.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/my_function.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class SlipGajiDetail extends StatefulWidget {
-  final String bulan;
-  final String nik;
-  final String judul;
-  final String tahun;
-  const SlipGajiDetail(
-      {super.key, required this.bulan, required this.nik, required this.judul, required this.tahun});
+class MapsFullscreen extends StatefulWidget {
+  const MapsFullscreen({super.key});
 
   @override
-  SlipGajiDetailState createState() => SlipGajiDetailState();
+  MapsFullscreenState createState() => MapsFullscreenState();
 }
 
-class SlipGajiDetailState extends State<SlipGajiDetail> {
+class MapsFullscreenState extends State<MapsFullscreen> {
   late final WebViewController webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(Colors.transparent)
@@ -38,21 +32,17 @@ class SlipGajiDetailState extends State<SlipGajiDetail> {
       },
     ))
     ..loadRequest(Uri.parse(
-        'http://$baseUrl/webview/detail_slip_gaji/$_bulan?nik=$_nik&tahun=$_tahun'));
+        'https://$baseUrl/maps/android/absen'));
   String _nik = '';
   String _bulan = '1';
+  String _tahun = DateTime.now().year.toString();
 
   // ignore: unused_field
   String _judul = '';
   int position = 1;
-  String _tahun = DateTime.now().year.toString();
   @override
   void initState() {
     // init();
-    _bulan = widget.bulan;
-    _nik = widget.nik;
-    _judul = widget.judul;
-    _tahun = widget.tahun;
     super.initState();
   }
 
@@ -76,7 +66,7 @@ class SlipGajiDetailState extends State<SlipGajiDetail> {
           backgroundColor: primarycolor,
           elevation: 0,
           title: const Text(
-            "Slip Gaji",
+            "Lokasi saat ini",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -92,7 +82,6 @@ class SlipGajiDetailState extends State<SlipGajiDetail> {
     // print(nik);
     setState(() {
       _nik = nik;
-      _bulan = widget.bulan;
     });
   }
 }

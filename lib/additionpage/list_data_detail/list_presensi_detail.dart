@@ -20,6 +20,7 @@ class ListPresensiDetail extends StatefulWidget {
 class ListPresensiDetailState extends State<ListPresensiDetail> {
   late final WebViewController webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(Colors.transparent)
     ..setNavigationDelegate(NavigationDelegate(
       onProgress: (int progress) {
         // Update loading bar.

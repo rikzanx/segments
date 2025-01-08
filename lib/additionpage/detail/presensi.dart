@@ -21,6 +21,7 @@ class PresensiMasuk extends StatefulWidget {
 class PresensiMasukState extends State<PresensiMasuk> {
   late final WebViewController webViewController = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(Colors.transparent)
     ..loadRequest(
         Uri.parse('$protokol$baseUrl/maps/android?lat=$lat&lng=$lng'));
   final lokasiController = TextEditingController();
