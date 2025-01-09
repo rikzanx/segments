@@ -37,8 +37,8 @@ class HomekahState extends State<Homekah> {
           child: Opacity(
             opacity: 1,
             child: Image.asset(
-              'assets/home_background.png',
-              fit: BoxFit.fitWidth,
+              'assets/background.png',
+              fit: BoxFit.fill,
             ),
           ),
         ),
@@ -353,6 +353,7 @@ class ContentSection extends StatelessWidget {
                                         }
                                         return Center(
                                           child: CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
                                             value: loadingProgress.expectedTotalBytes != null
                                                 ? loadingProgress.cumulativeBytesLoaded /
                                                     (loadingProgress.expectedTotalBytes ?? 1)
@@ -608,6 +609,7 @@ class CardWithImage extends StatelessWidget {
                       }
                       return Center(
                         child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
                                   (loadingProgress.expectedTotalBytes ?? 1)

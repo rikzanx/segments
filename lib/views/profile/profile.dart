@@ -78,6 +78,7 @@ class ProfileState extends State<Profile> {
                           children: [
                             CircleAvatar(
                               radius: 35,
+                              backgroundColor: primarycolor,
                               foregroundImage: NetworkImage(
                                 "$protokol$baseUrl/assets/foto_profil/${dataUser['karyawan']['user']['foto']}",
                               ),

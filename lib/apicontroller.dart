@@ -9,6 +9,8 @@ import 'package:segments/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:segments/apiresponse.dart';
+import 'package:segments/constant.dart';
+import 'package:flutter/material.dart';
 
 class ApiController {
   late Response response;
@@ -20,7 +22,30 @@ class ApiController {
       var parameter,
       Map<String, String>? body}) async {
     Uri url;
-    BotToast.showLoading();
+    BotToast.showCustomLoading(
+      toastBuilder: (context) {
+        return Center(
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: primarycolor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Change loading color
+              ),
+            ),
+          ),
+        );
+      },
+      backgroundColor: Colors.transparent, // Background overlay color
+      allowClick: false,
+      animationDuration: Duration(milliseconds: 300),
+      animationReverseDuration: Duration(milliseconds: 300),
+      duration: Duration(seconds: 100),
+    );
     // if (protokol == 'https://')
     //   url = Uri.https(baseUrl, "api/" + path);
     // else
@@ -74,7 +99,6 @@ class ApiController {
           BotToast.closeAllLoading();
           return ApiResponse<dynamic>(false,
               message: "tidak bisa daftar", data: data);
-          // BotToast.closeAllLoading();
           // return ApiResponse<String>(false, message: "tidak bisa daftar");
         }
       } catch ($e) {

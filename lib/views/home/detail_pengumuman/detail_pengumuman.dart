@@ -106,6 +106,7 @@ class DetailPengumumanState extends State<DetailPengumuman> {
                                   }
                                   return Center(
                                     child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
                                       value: loadingProgress.expectedTotalBytes != null
                                           ? loadingProgress.cumulativeBytesLoaded /
                                               (loadingProgress.expectedTotalBytes ?? 1)

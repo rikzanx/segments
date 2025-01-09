@@ -73,7 +73,9 @@ class MapsFullscreenState extends State<MapsFullscreen> {
         ),
         body: IndexedStack(index: position, children: <Widget>[
           WebViewWidget(controller: webViewController),
-          const Center(child: CircularProgressIndicator()),
+          Center(child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
+          )),
         ]));
   }
 

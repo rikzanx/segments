@@ -177,8 +177,10 @@ class TambahLaporanState extends State<TambahLaporan> {
                       SizedBox(
                         height: 300,
                         child: lat == 0.0
-                            ? const Center(
-                                child: CircularProgressIndicator(),
+                            ?  Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
+                                ),
                               )
                             : WebViewWidget(controller: webViewController),
                       ),

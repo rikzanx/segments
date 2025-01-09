@@ -112,7 +112,9 @@ class ListLemburDetailState extends State<ListLemburDetail> {
       const DataColumn(label: Text('Selesai')),
       const DataColumn(label: Text('NIK')),
       const DataColumn(label: Text('Nama')),
-      const DataColumn(label: Text('Kajaga')),
+      const DataColumn(label: Text('Validasi')),
+      const DataColumn(label: Text('Mengetahui')),
+      const DataColumn(label: Text('Reject')),
       const DataColumn(label: Text('Aksi')),
     ];
   }
@@ -122,42 +124,56 @@ class ListLemburDetailState extends State<ListLemburDetail> {
       int num = 0;
       return _dataLembur.map((data) {
         num++;
-        return DataRow(cells: [
-          DataCell(Text(num.toString())),
-          DataCell(Text(data['tgl_lembur'].toString())),
-          DataCell(Text(data['total_jam_lembur'].toString())),
-          DataCell(Text(data['jenis_lembur'].toString())),
-          DataCell(Text(data['detail_lembur'].toString())),
-          DataCell(Text(data['mulai'].toString())),
-          DataCell(Text(data['selesai'].toString())),
-          DataCell(Text(data['nik'])),
-          DataCell(Text(data['karyawan']['nama_lengkap'])),
-          const DataCell(Text("")),
-          DataCell(GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-              pindahPageCupertino(
-                  context,
-                  LemburEdit(
-                    idLembur: data['id_lembur'].toString(),
-                    jenisLembur: data['jenis_lembur'].toString(),
-                    tglLembur: data['tgl_lembur'].toString(),
-                    mulai: data['mulai'].toString().substring(0, 5),
-                    selesai: data['selesai'].toString().substring(0, 5),
-                    detailLembur: data['detail_lembur'].toString(),
-                  ));
+        final isEvenRow = num % 2 == 0;
+        return DataRow(
+          color: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              return isEvenRow ? Colors.grey[200] : null;
             },
-            child: const Text(
-              "Edit",
-              style: TextStyle(color: Colors.red),
-            ),
-          ))
-        ]);
+          ),
+          cells: [
+            DataCell(Text(num.toString())),
+            DataCell(Text(data['tgl_lembur'].toString())),
+            DataCell(Text(data['total_jam_lembur'].toString())),
+            DataCell(Text(data['jenis_lembur'].toString())),
+            DataCell(Text(data['detail_lembur'].toString())),
+            DataCell(Text(data['mulai'].toString())),
+            DataCell(Text(data['selesai'].toString())),
+            DataCell(Text(data['nik'])),
+            DataCell(Text(data['karyawan']['nama_lengkap'])),
+            DataCell(Text(data['validasi']?.toString() ?? "")),
+            DataCell(Text(data['mengetahui']?.toString() ?? "")),
+            DataCell(Text(data['reject_by']?.toString() ?? "")),
+            data['validasi'] != null
+              ? DataCell(Text('-',style: TextStyle(color: Colors.red)))
+              : DataCell(GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  pindahPageCupertino(
+                      context,
+                      LemburEdit(
+                        idLembur: data['id_lembur'].toString(),
+                        jenisLembur: data['jenis_lembur'].toString(),
+                        tglLembur: data['tgl_lembur'].toString(),
+                        mulai: data['mulai'].toString().substring(0, 5),
+                        selesai: data['selesai'].toString().substring(0, 5),
+                        detailLembur: data['detail_lembur'].toString(),
+                      ));
+                },
+                child: const Text(
+                  "Edit",
+                  style: TextStyle(color: Colors.red),
+                ),
+              ))
+          ]
+        );
       }).toList();
     } else {
       return [
         const DataRow(cells: [
           DataCell(Text('Data Tidak ada')),
+          DataCell(Text('')),
+          DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),

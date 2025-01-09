@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:table_calendar/table_calendar.dart';
 import 'utils.dart';
+import 'package:segments/constant.dart';
 
 class Schedule extends StatefulWidget {
   const Schedule({super.key, required this.title});
@@ -99,9 +100,11 @@ class ScheduleState extends State<Schedule> {
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
+      backgroundColor: primarycolor,
       title: const Text(
         'Jadwal Kerja - Karyawan',
         style: TextStyle(
+          color: Colors.white,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.bold,
         ),
@@ -111,7 +114,9 @@ class ScheduleState extends State<Schedule> {
       future: fetchEvents(),  // Ambil data event
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
+          ));
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));

@@ -24,9 +24,11 @@ class ListDataState extends State<ListData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: primarycolor,
         title: const Text(
           'List Data',
           style: TextStyle(
+            color: Colors.white,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.bold,
           ),

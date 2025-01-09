@@ -158,8 +158,10 @@ class PresensiKeluarState extends State<PresensiKeluar> {
             SizedBox(
               height: 200,
               child: lat == 0.0
-                  ? const Center(
-                      child: CircularProgressIndicator(),
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
+                      ),
                     )
                   : WebViewWidget(controller: webViewController),
             )

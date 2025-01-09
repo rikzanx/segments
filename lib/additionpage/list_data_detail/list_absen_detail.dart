@@ -98,7 +98,9 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
       const DataColumn(label: Text('Nama')),
       const DataColumn(label: Text('Tipe Absen')),
       const DataColumn(label: Text('Detail')),
-      const DataColumn(label: Text('Kajaga')),
+      const DataColumn(label: Text('Validasi')),
+      const DataColumn(label: Text('Mengetahui')),
+      const DataColumn(label: Text('Reject')),
     ];
   }
 
@@ -107,20 +109,32 @@ class ListAbsenDetailState extends State<ListAbsenDetail> {
       int num = 0;
       return _dataAbsen.map((data) {
         num++;
-        return DataRow(cells: [
-          DataCell(Text(num.toString())),
-          DataCell(Text(data['tgl_absen'].toString())),
-          DataCell(Text(data['nik'])),
-          DataCell(Text(data['karyawan']['nama_lengkap'])),
-          DataCell(Text(data['tipe_absen'])),
-          DataCell(Text(data['detail'])),
-          const DataCell(Text(""))
-        ]);
+        final isEvenRow = num % 2 == 0;
+        return DataRow(
+          color: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              return isEvenRow ? Colors.grey[200] : null;
+            },
+          ),
+          cells: [
+            DataCell(Text(num.toString())),
+            DataCell(Text(data['tgl_absen'].toString())),
+            DataCell(Text(data['nik'])),
+            DataCell(Text(data['karyawan']['nama_lengkap'])),
+            DataCell(Text(data['tipe_absen'])),
+            DataCell(Text(data['detail'])),
+            DataCell(Text(data['validasi']?.toString() ?? "")),
+            DataCell(Text(data['mengetahui']?.toString() ?? "")),
+            DataCell(Text(data['reject_by']?.toString() ?? "")),
+          ]
+        );
       }).toList();
     } else {
       return [
         const DataRow(cells: [
           DataCell(Text('Data Tidak ada')),
+          DataCell(Text('')),
+          DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),
           DataCell(Text('')),

@@ -249,8 +249,10 @@ class PresensiMasukState extends State<PresensiMasuk> {
               SizedBox(
                 height: 210,
                 child: lat == 0.0
-                    ? const Center(
-                        child: CircularProgressIndicator(),
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
+                        ),
                       )
                     : WebViewWidget(controller: webViewController),
               )
@@ -380,6 +382,7 @@ class InfoUser extends StatelessWidget {
                   }
                   return Center(
                     child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(primarycolor),
                       value: loadingProgress.expectedTotalBytes != null
                           ? loadingProgress.cumulativeBytesLoaded /
                               (loadingProgress.expectedTotalBytes ?? 1)

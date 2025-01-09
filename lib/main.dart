@@ -53,8 +53,10 @@ class SplashScreen extends StatefulWidget {
 class SplashScreenState extends State<SplashScreen> {
   // int _counter = 0;
   String appVersion = "Loading...";
+  String appVersion2 = "";
+  String appVersion3 = "";
   String urlDownload = "https://google.com";
-  bool canContinue = false;
+  bool canContinue = true;
   @override
   void initState() {
     init();
@@ -78,6 +80,26 @@ class SplashScreenState extends State<SplashScreen> {
             Hero(
               tag: "logo",
               child: Image.asset('assets/logoputih.png', scale: 2.5)
+            ),
+            Positioned(
+              bottom: 90,
+              child: Container(
+                padding: EdgeInsets.only(bottom: tinggilayar / 15),
+                child: Text(appVersion3,
+                style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),),
+              ),
+            ),
+            Positioned(
+              bottom: 70,
+              child: Container(
+                padding: EdgeInsets.only(bottom: tinggilayar / 15),
+                child: Text(appVersion2,
+                style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),),
+              ),
             ),
             Positioned(
               bottom: 50,
@@ -116,13 +138,15 @@ class SplashScreenState extends State<SplashScreen> {
       await ApiController().getDataVersion().then((value) {
         if(value.data['version'] != packageInfo.version){
           setState(() {
-            appVersion = "Mohon Update Aplikasi!!!";
+            appVersion3 = "Mohon update aplikasi.";
+            appVersion2 = "Klik tombol dibawah untuk mendownload.";
+            appVersion = "Uninstall kemudian install ulang";
             urlDownload = value.data['link_download'];
+            canContinue= false;
           });
         }else{
           setState(() {
             appVersion = "v${packageInfo.version}";
-            canContinue= true;
           });
         }
       });
@@ -163,7 +187,7 @@ class SplashScreenState extends State<SplashScreen> {
   Future<void> _launchURL(String url) async {
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+      await launchUrl(uri,mode: LaunchMode.externalApplication);
     } else {
       throw 'Tidak dapat membuka URL: $url';
     }

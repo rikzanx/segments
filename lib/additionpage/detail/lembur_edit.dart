@@ -310,8 +310,7 @@ class LemburEditState extends State<LemburEdit> {
     await ApiController().getUser().then((value) {
       if (1==1) {
         setState(() {
-          Map<String, dynamic>? data = value.data; // Declare data as a Map or null
-          // Check if data is not null before accessing its contents
+          data = value.data;
           if (data != null) {
             if (data.containsKey("sisa_lembur")) {
               sisaLembur = data["sisa_lembur"].toString(); // Convert to String if key exists
