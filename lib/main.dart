@@ -116,7 +116,7 @@ class SplashScreenState extends State<SplashScreen> {
               child: Container(
                 padding: EdgeInsets.only(bottom: tinggilayar / 15),
                 child: canContinue
-                    ? const Text('') // Jika canContinue true, tampilkan teks 'OK'
+                    ? const Text('')
                     : TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.white,

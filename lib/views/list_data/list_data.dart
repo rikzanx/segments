@@ -9,6 +9,7 @@ import 'package:segments/additionpage/list_data_detail/penilaian_kinerja.dart';
 import 'package:segments/additionpage/list_data_detail/penilaian_kinerja_tahun.dart';
 import 'package:segments/additionpage/list_data_detail/slip_gaji.dart';
 import 'package:segments/additionpage/list_data_detail/slip_gaji_tahun.dart';
+import 'package:segments/additionpage/list_data_detail/resume_kpi.dart';
 import 'package:segments/constant.dart';
 import 'package:segments/function/route.dart';
 
@@ -112,6 +113,21 @@ class ListDataState extends State<ListData> {
                   // MyFunction().belumTersedia();
                 },
                 judul: "Penilaian Kinerja",
+                deskripsi: "Ini Deksripsi",
+              ),
+              SizedBox(
+                height: tinggilayar / 80,
+              ),
+              CardFunction(
+                asset: Image.asset(
+                  "assets/penilaiankinerja.png",
+                  fit: BoxFit.cover,
+                ),
+                fungsi: () {
+                  pindahPageCupertino(context, const ResumeKpi());
+                  // MyFunction().belumTersedia();
+                },
+                judul: "Resume KPI",
                 deskripsi: "Ini Deksripsi",
               ),
               SizedBox(

@@ -148,7 +148,7 @@ class DispensasiState extends State<Dispensasi> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  label("Foto Bukti/Dokumen Dispensasi"),
+                  label("Foto/Dokumen"),
                   IconButton(
                       onPressed: () {
                         getImage();

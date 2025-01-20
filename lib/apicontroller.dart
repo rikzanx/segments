@@ -144,6 +144,14 @@ class ApiController {
     return await connection(
         method: 'post', path: "user/change_password", body: body);
   }
+  
+  Future changeDataDiri(Map<String, String> body) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var nik = prefs.getString('nik');
+    body['nik'] = nik.toString();
+    return await connection(
+        method: 'post', path: "user/change_data_diri", body: body);
+  }
 
   Future checkin(var body) async {
     return await connection(method: 'post', path:'user/checkin', body: body);

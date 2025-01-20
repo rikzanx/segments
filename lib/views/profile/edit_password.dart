@@ -4,21 +4,17 @@ import 'package:segments/additionpage/detail/presensi.dart';
 import 'package:segments/apicontroller.dart';
 import 'package:segments/class/form_component.dart';
 import 'package:segments/constant.dart';
-import 'package:segments/views/profile/edit_password.dart';
-import 'package:segments/views/profile/edit_data_diri.dart';
-import 'package:segments/my_function.dart';
-import 'package:segments/function/route.dart';
 
 Map<String, dynamic> data = {};
 
-class Edit extends StatefulWidget {
-  const Edit({super.key});
+class EditPassword extends StatefulWidget {
+  const EditPassword({super.key});
 
   @override
-  EditState createState() => EditState();
+  EditPasswordState createState() => EditPasswordState();
 }
 
-class EditState extends State<Edit> {
+class EditPasswordState extends State<EditPassword> {
   final dateController = TextEditingController();
   final deskripsiController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -63,7 +59,7 @@ class EditState extends State<Edit> {
           ),
         ),
         title: Text(
-          "Edit Profil",
+          "Edit Password",
           style: TextStyle(color: primarycolor, fontWeight: FontWeight.bold),
         ),
       ),
@@ -74,26 +70,80 @@ class EditState extends State<Edit> {
             const SizedBox(
               height: 10,
             ),
-            LitleCardFunction(
-              fungsi: () {
-                pindahPageCupertino(
-                    context,
-                    EditPassword(
-                    ));
-              },
-              judul: "> Edit Password Akun"
+            Text(
+              "Ganti Password Akun",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: primarycolor,
+                  fontSize: tinggilayar / lebarlayar * 8),
             ),
             const SizedBox(
               height: 10,
             ),
-            LitleCardFunction(
-              fungsi: () {
-                pindahPageCupertino(
-                    context,
-                    EditDataDiri(
-                    ));
+            myContainer(Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                label("Password Lama"),
+                const SizedBox(
+                  height: 4,
+                ),
+                CustomTextFormField(
+                  isObsecureText: true,
+                  controller: passwordController,
+                  placeholder: "Masukkan Password lama",
+                  isRequired: true,
+                )
+              ],
+            )),
+            const SizedBox(
+              height: 16,
+            ),
+            myContainer(Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                label("Password Baru"),
+                const SizedBox(
+                  height: 4,
+                ),
+                CustomTextFormField(
+                  isObsecureText: true,
+                  controller: newPasswordController,
+                  placeholder: "Masukkan Password baru",
+                  isRequired: true,
+                )
+              ],
+            )),
+            const SizedBox(
+              height: 16,
+            ),
+            myContainer(Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                label("Konfirmasi Password Baru"),
+                const SizedBox(
+                  height: 4,
+                ),
+                CustomTextFormField(
+                  isObsecureText: true,
+                  controller: newConfirmPasswordController,
+                  placeholder: "Masukkan Password baru",
+                  isRequired: true,
+                )
+              ],
+            )),
+            const SizedBox(
+              height: 16,
+            ),
+            PrimaryButton(
+              warna: Colors.white,
+              onClick: () {
+                // // ignore: unrelated_type_equality_checks
+                // if(oldPasswordController == ""){
+                //   // print("ok");
+                // }
+                save();
               },
-              judul: "> Edit Data Diri"
+              teksnya: 'K I R I M',
             ),
           ],
         ),
@@ -212,57 +262,6 @@ class BoxDeskripsi extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LitleCardFunction extends StatelessWidget {
-  final String judul;
-  final VoidCallback fungsi;
-  final bool disable;
-  const LitleCardFunction({
-    super.key,
-    required this.fungsi,
-    required this.judul,
-    this.disable = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: fungsi,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10.0),
-        padding: EdgeInsets.symmetric(horizontal: marginhorizontal),
-        height: tinggilayar / 12,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 0),
-              spreadRadius: 3,
-              blurRadius: 10,
-              color: Color(0xffEFEFEF),
-            ),
-          ],
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                judul,
-                style: TextStyle(
-                    color: disable ? Colors.grey : primarycolor,
-                    fontSize: tinggilayar / lebarlayar * 9,
-                    fontWeight: FontWeight.bold),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
